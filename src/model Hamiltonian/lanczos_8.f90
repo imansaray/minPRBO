@@ -16,8 +16,8 @@
         integer, parameter :: m=1000,mhalf=int(m/2), mlanc=100
         integer :: i,j,k,l,n,info,itemp
         real(kind=8) :: b0,temp1,tol,md, mc,mf,frob,tau,sgn_star
-        real(kind=8) :: u0,DZNRM2,ZDOTC,lnorm,DLANGE,rand_num(m),rand_num2(m) ! fnorm, frobenius norm
-        real,parameter :: pi=3.141592654d0
+        real(kind=8) :: u0,DZNRM2,ZDOTC,lnorm,DLANGE,rand_num(m),rand_num2(m),eps1 ! fnorm, frobenius norm
+        real,parameter :: pi=3.141592654d0,eps=1.11E-16
         integer,parameter :: sedsz=9
         integer           :: seed(sedsz),seed2(sedsz+3),herm,mi,mj,chknorm(mlanc)
         complex,parameter :: ii=complex(0.d0,1.d0)
@@ -55,12 +55,13 @@
         real(kind=8) :: omega, eta,omega_scal,rterm,rterm1,rterm2,rterm3,spect_range,del_spect,vbnorm
 
         ! Choosing Matrix type
-        herm=2  !symm=0 , hermitian=1, non-symm,real= 2, nonherm =3
+        herm=3  !! hermitian=1, non-symm,real= 2, nonherm =3
 
-        ! Reorthog flags
-        reorth = .false.
+        ! Reorthog flags and parameters
+        reorth = .true.
         full = .false.
         paige = .true.
+        eps1 = sqrt(eps) ! tolerance for reorthogonalization
         
 
         ! Initializing and assembling arrays 
@@ -111,9 +112,10 @@
         call random_number(rand_num2)
 
         do i=1,m
-          v(i) = rand_num(i)
-          v0(i) = rand_num(i)
-          v_h(i) = rand_num2(i)
+!          v(i) = rand_num(i)
+!          v0(i) = rand_num(i)
+          v(i) = 1.0d0
+          v0(i) = 1.0d0
         enddo
 
         ! Dielectric function parameters
@@ -142,62 +144,11 @@
         rewind(11)
         rewind(111)
         
-        if (herm==0) then
-           write(6,*) ""
-           write(6,*) "====== Doing real, symmetric case ====="
-       
-        !  Basic example, symmetric, diag = i^2, off diag = i+(-1)^j*(ii*j)   
-             do j=1,m
-                do i=1,j
-                   rterm=del_spect*(mod(i,mi)+mod(j,mj))
-                   Hmat(i,j)=rterm
-                   Hmat(j,i)=rterm
-                enddo
-             enddo
 
-        ! diagonals
-           do i=1,m
-        ! Based on Example from : "The Lanczos Alg with partial reorthogonalization"! H(i,i) = 1.0d0*i**2
-               rterm=del_spect*i**1
-               Hmat(i,i) = rterm
-           enddo
-
-           ! Tridiagonalize the Hamiltonian
-           if (reorth) then
-             if (full) then
-               write(6,*) " Doing full reorthogonalization"
-               call lanczos_herm_re_full(Hmat,v0,m,mlanc,alpha,beta,&
-                                           fnorm)
-             else
-               write(6,*) " Doing minimal partial reorthogonalization"
-               write(6,*) " "
-               call lanc_herm_re_minpro(Hmat,v0,m,mlanc,alpha,beta,&
-                                           fnorm,estnorm,chknorm) 
-             endif
-           else
-               write(6,*) " Not doing any reorthogonalization"
-             call lanczos_herm_re(Hmat,v0,m,mlanc,alpha,beta,fnorm)
-          endif
-
-          ! Saving alpha, beta , fnorm to array
-          do i=1,mlanc
-!            write(11,*) i,fnorm(i)
-            write(11,'(1i3,2e16.8,1i3)')i,fnorm(i),estnorm(i),chknorm(i)
-          enddo
-
-!           write(6,*) "----- Printing alpha and beta -------"
-           do i=1,mlanc
-!              write(6,*) ""
-              write(10,'(2e16.8)') alpha(i),beta(i)
-              write(6,*) 'alpha=',alpha(i),'beta(i)=',beta(i)
-              write(6,*) ""
-           enddo
-           close(10)
-           close(11)
-
-        elseif (herm==1) then
-           write(6,*) ""
+        if (herm==1) then
+           print *
            write(6,*) "===== Doing Hermitian, case ====="
+           print *
 
              ! Basic example, Hermitian, diag = mod(i,6), off diag =
              ! mod(i,6)+ii*(mod(j,5)), a_(ij) = a_(ji)^dag
@@ -241,8 +192,9 @@
            close(14)
            close(15)
         elseif (herm==2) then
-           write(6,*) ""
+           print *
            write(6,*) "===== Doing non-symmetric, real case ====="
+           print *
 
           ! Basic example, Non-symmetric, real, diag = mod(i,6), 
           ! off diag = mod(i,6)+1.0*(mod(j,5))
@@ -282,9 +234,9 @@
            enddo
            close(10)
         else 
-           write(6,*) ""
+           print *
            write(6,*) "===== Doing non-Hermitian, case ====="
-
+           print *
              ! Basic example, Non Hermitian, diag = mod(i,6), 
              ! off diag =
              do j=1,m
@@ -318,7 +270,7 @@
                  write(6,*) " "
                  write(6,*) " Doing minimal partial rebiorthogonalization "
                  call lanc_non_herm_minprbo(H,v,m,mlanc,zalpha,zbeta,&
-                                  zdelta,zborth,fnorm,paige,reorth) 
+                                  zdelta,zborth,fnorm,paige,reorth,eps1) 
               endif
            else
               write(6,*) " "
@@ -2161,11 +2113,11 @@
             enddo
           enddo 
           fterm=sqrt(fterm) 
-!          write(6,*) " " 
-!          write(6,*) "^^^^^^^^^^^^^^^^^^"    
-!          write(6,*) "frob=",fterm,"alt",norm2(real(iden))!,"lpck=",lterm
-!          write(6,*) "^^^^^^^^^^^^^^^^^^"
-!          write(6,*) " "
+          write(6,*) " " 
+          write(6,*) "^^^^^^^^^^^^^^^^^^"    
+          write(6,*) "Loss of orthog. =",fterm
+          write(6,*) "^^^^^^^^^^^^^^^^^^"
+          write(6,*) " "
           fnorm(k) = fterm 
           deallocate(iden,Pj)
 
@@ -2449,7 +2401,7 @@
           call zcheck_orthog_frob(Pj,Qj,m,k,frob)
           write(6,*) " "
           write(6,*) "^^^^^^^^^^^^^^^^^^^^^^^^^" 
-          write(6,*) "frob =",frob !,"alt="
+          write(6,*) "Loss oof biorthog. =",frob !,"alt="
           write(6,*) "^^^^^^^^^^^^^^^^^^^^^^^^^"
           write(6,*) " "
           fnorm(k) = frob
@@ -2458,14 +2410,14 @@
           tq=matmul(A,q) !doing A*v_j
           tp=matmul(transpose(conjg(A)),p) ! doing A^H*w_j
           term=dot_product(p,tq) ! Following the SLEPc paper for Hermitian case
-          write(6,*) ""
-          write(6,*) "====== Before Lanczos, overlap ========"
-          write(6,*) " <p|A|q> =", term
-          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "====== Before Lanczos, overlap ========"
+!          write(6,*) " <p|A|q> =", term
+!          write(6,*) ""
 
           ! Calculating alpha
-          qp = tq(i)- zgamma(k)*qm1 ! v^_(j+1)
-          pp = tp(i) - conjg(zbeta(k))*pm1 ! v^_(j+1)
+          qp = tq - zgamma(k)*qm1 ! v^_(j+1)
+          pp = tp - conjg(zbeta(k))*pm1 ! v^_(j+1)
 
           term=dot_product(p,qp) ! Following the SLEPc paper for Hermitian case
           zalpha(k) = term
@@ -2525,23 +2477,23 @@
           zborth(k) = term1
 
           term = dot_product(qp,qp) ! following netlib Alg 7.13
-          write(6,*) ""
-          write(6,*) "(r^_(j+1),r^_(j+1))=",term
-          write(6,*) "norm=",sqrt(term) 
-          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "(r^_(j+1),r^_(j+1))=",term
+!          write(6,*) "norm=",sqrt(term) 
+!          write(6,*) ""
           term = dot_product(pp,pp) ! following netlib Alg 7.13
-          write(6,*) ""
-          write(6,*) "(s^_(j+1),s^_(j+1))=",term
-          write(6,*) "norm=",sqrt(term) 
-          write(6,*) ""
-          write(6,*) ""
-          write(6,*) "(r^_(j+1),s^_(j+1))=",term1 
-          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "(s^_(j+1),s^_(j+1))=",term
+!          write(6,*) "norm=",sqrt(term) 
+!          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "(r^_(j+1),s^_(j+1))=",term1 
+!          write(6,*) ""
           lnorm1 = sqrt(abs(term1))  ! following yambo paper
           lnorm2 = conjg(term1)/lnorm1
-          write(6,*) "|(r^_(j+1),s^_(j+1))|=",lnorm1 !,"sign =",csgn
-          write(6,*) "lnorm2 =",lnorm2
-          write(6,*) ""
+!          write(6,*) "|(r^_(j+1),s^_(j+1))|=",lnorm1 !,"sign =",csgn
+!          write(6,*) "lnorm2 =",lnorm2
+!          write(6,*) ""
           if (k .ne. mlanc) then
             zbeta(k+1)= lnorm1 ! following yambo paper
             zgamma(k+1)=lnorm2 ! following Y. Saad's paper
@@ -2579,13 +2531,17 @@
 !          write(6,*) " < p_i, q_i > =",term
 !          write(6,*) " "
         enddo ! END OF LANCZOS LOOP
+        write(6,*) " "
+        write(6,*) "****** FULL RE ORTHOGS = ",(mlanc+1)*mlanc,"******"
+        write(6,*) " "
+        write(6,*) " "
         return
         end subroutine lanczos_non_herm
 
 
 
         subroutine lanc_non_herm_minprbo(A,v0,m,mlanc,zalpha,zbeta,zgamma,& 
-                                   zborth,fnorm,paige,reorth)
+                                   zborth,fnorm,paige,reorth,eps1)
         implicit none
 !--------------------------------------------------------------------------------
 ! Carries out the non-hermitian Lanczos algorithm on a complex matrix. Does a minimal
@@ -2648,9 +2604,6 @@
         rand_num=0.0
         mhalf=int(m/2)
 
-! Set tolerance
-        eps1 = eps
-!        eps1 = sqrt(eps) !1000*eps
 
 !  Normalizing initial vector , v_0
         u0=dot_product(v0,v0)
@@ -2668,6 +2621,7 @@
         write(6,*) " "
         write(6,*) " ****** eps1 =",eps1,"*******"
         write(6,*) " "
+
 ! total # of orthogonalizations
         orthtot = 0
 !----------  Starting the Lanczos iteration ------------------------
@@ -2696,16 +2650,21 @@
           Pj = Planc(:,1:k)
           Qj = Qlanc(:,1:k)   
           call zcheck_orthog_frob(Pj,Qj,m,k,frob)
+          write(6,*) " "
+          write(6,*) "^^^^^^^^^^^^^^^^^^^^^^^^^" 
+          write(6,*) "Loss of biorthog. =",frob !,"alt="
+          write(6,*) "^^^^^^^^^^^^^^^^^^^^^^^^^"
+          write(6,*) " "
           fnorm(k) = frob
           deallocate(Pj,Qj)
 
           tq=matmul(A,q) !doing A*v_j
           tp=matmul(transpose(conjg(A)),p) ! doing A^H*w_j
           term=dot_product(p,tq) ! Following the SLEPc paper for Hermitian case
-          write(6,*) ""
-          write(6,*) "====== Before Lanczos, overlap ========"
-          write(6,*) " <p|A|q> =", term
-          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "====== Before Lanczos, overlap ========"
+!          write(6,*) " <p|A|q> =", term
+!          write(6,*) ""
 
 !   Including this Paige-like regularization, from hermitian lanczos, for better convergence
           do i=1,m
@@ -2747,8 +2706,8 @@
             qw_jk = 0.0
             Pj = Planc(:,1:k)
             Qj = Qlanc(:,1:k)
-            write(6,*) "shape Pj/Qj =",shape(Pj)
-            write(6,*) " "
+!            write(6,*) "shape Pj/Qj =",shape(Pj)
+!            write(6,*) " "
 
 !!  Calculate local orthog
             vp = 0.0
@@ -2760,16 +2719,15 @@
             vq=(1.0/lnorm1)*qp! v_(j+1)=v^_(j+1)/delta_(j+1)
             pw_jk = matmul(conjg(transpose(Qj)),vp)
             qw_jk = matmul(conjg(transpose(Pj)),vq)
-!!            estnorm(k) = max(maxval(abs(pw_jk)),maxval(abs(pw_jk)))
-            write(6,*) " "
-            write(6,*) "orthog, <p_j+1,q_k>,max",maxval(abs(pw_jk))
-            write(6,*) " "
-            write(6,*) pw_jk
-            write(6,*) " "
-            write(6,*) "orthog, <q_j+1,p_k>,max",maxval(abs(qw_jk))
-            write(6,*) " "
-            write(6,*) qw_jk
-            write(6,*) " "
+!            write(6,*) " "
+!            write(6,*) "orthog, <p_j+1,q_k>,max",maxval(abs(pw_jk))
+!            write(6,*) " "
+!            write(6,*) pw_jk
+!            write(6,*) " "
+!            write(6,*) "orthog, <q_j+1,p_k>,max",maxval(abs(qw_jk))
+!            write(6,*) " "
+!            write(6,*) qw_jk
+!            write(6,*) " "
 
 ! deallocate Pj, Qj
             deallocate(Pj,Qj)
@@ -2788,9 +2746,9 @@
 !              write(6,*) "i=",i,"term =",term
 !              write(6,*) " "
               if ((term_re .ge. eps1).or.(term_im .ge. eps1)) then
-                write(6,*) " "
-                write(6,*) " vector",i,"lost orth, pw_jk=",term,eps1
-                write(6,*) " "
+!                write(6,*) " "
+!                write(6,*) " vector",i,"lost orth, pw_jk=",term,eps1
+!                write(6,*) " "
                 porthopt(i) = 1
               endif
             enddo
@@ -2802,9 +2760,9 @@
               term_re = abs(real(term))
               term_im = abs(aimag(term))
               if ((term_re .ge. eps1).or. (term_im .ge. eps1)) then
-                write(6,*) " "
-                write(6,*) " vector",i,"lost orth, qw_jk=",term,eps1
-                write(6,*) " "
+!                write(6,*) " "
+!                write(6,*) " vector",i,"lost orth, qw_jk=",term,eps1
+!                write(6,*) " "
                 qorthopt(i) = 1
               endif
             enddo
@@ -2912,24 +2870,24 @@
           zborth(k) = term1
 
           term = dot_product(qp,qp) ! following netlib Alg 7.13
-          write(6,*) ""
-          write(6,*) "(r^_(j+1),r^_(j+1))=",term
-          write(6,*) "norm=",sqrt(term) 
-          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "(r^_(j+1),r^_(j+1))=",term
+!          write(6,*) "norm=",sqrt(term) 
+!          write(6,*) ""
           term = dot_product(pp,pp) ! following netlib Alg 7.13
-          write(6,*) ""
-          write(6,*) "(s^_(j+1),s^_(j+1))=",term
-          write(6,*) "norm=",sqrt(term) 
-          write(6,*) ""
-          write(6,*) ""
-          write(6,*) "(r^_(j+1),s^_(j+1))=",term1 
-          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "(s^_(j+1),s^_(j+1))=",term
+!          write(6,*) "norm=",sqrt(term) 
+!          write(6,*) ""
+!          write(6,*) ""
+!          write(6,*) "(r^_(j+1),s^_(j+1))=",term1 
+!          write(6,*) ""
           lnorm1 = sqrt(abs(term1))  ! following yambo paper
           lnorm2 = conjg(term1)/lnorm1
-          write(6,*) "|(r^_(j+1),s^_(j+1))|=",lnorm1 !,"sign =",csgn
+!          write(6,*) "|(r^_(j+1),s^_(j+1))|=",lnorm1 
 !          write(6,*) "(v^_(j+1),w^_(j+1))=",lnorm1
-          write(6,*) "lnorm2 =",lnorm2
-          write(6,*) ""
+!          write(6,*) "lnorm2 =",lnorm2
+!          write(6,*) ""
           if (k .ne. mlanc) then
             zbeta(k+1)= lnorm1 ! following yambo paper
             zgamma(k+1)=lnorm2 ! following Y. Saad's paper
@@ -2954,13 +2912,13 @@
 ! Check for orthog after partial rebiorthog
             call zcheck_orthog_frob(Planc(:,1:k+1),Qlanc(:,1:k+1),& 
                                        m,k+1,frob)
-            write(6,*) "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-            write(6,*) "Lost semi orthogonality at lanc iter",k
-            write(6,*) " "
-            write(6,*) "Norm after GS = ",frob
-            write(6,*) " "
-            write(6,*) "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-            write(6,*) " "
+!            write(6,*) "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+!            write(6,*) "Lost semi orthogonality at lanc iter",k
+!            write(6,*) " "
+!            write(6,*) "Norm after GS = ",frob
+!            write(6,*) " "
+!            write(6,*) "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+!            write(6,*) " "
           endif
 
 ! update total orthogs
@@ -2968,7 +2926,7 @@
         enddo ! END OF LANCZOS LOOP
 !  Print out final total orthogonalizations
         write(6,*) " "
-        write(6,*) "****** TOTAL ORTHOGS =",orthtot,"******"
+        write(6,*) "****** TOTAL PARTIAL ORTHOGS =",orthtot," VS FULL RE ORTHOGS = ",(mlanc+1)*mlanc,"******"
         write(6,*) " "
         write(6,*) " "
         return
