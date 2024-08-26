@@ -1,5 +1,5 @@
-# gnuplot script to plot the data for complex energy 
-# paper
+# Simple gnuplot script to plot the sample data and saved in
+# example figures
 
 #path0="/wrk/inm4/Si/full_BSE_gen_herm/"
 path0="/mnt/c/Users/inm4/OneDrive - NIST/Desktop/Publications/minPRBO/model_hamiltonian/serial/"
