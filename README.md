@@ -25,13 +25,10 @@ The sample programs provided carry out this minimal partial rebiorthogonalizatio
 * planczos_full.f90 - this contains a parallel version of the full rebiorthogonlization strategy using ScaLAPACK and PBLAS libraries.
 * planczos_minprbo.f90 -  this contains a parallel version of the minPRBO strategy using SCALAPACK and PBLAS libraries.
 
-## Ab initio Hamiltonian
-* smnewma.f90 -  this is the main program that carries out the BSE calculation of the dielectric function for a comlex energy Hamiltonian. It carries out the full rebiorthogonalization, the minPRBO strategy, PRBO as originally proposed and also the GMRES solution.
-* psmnewma_full.f90 - implements the full rebiorthogonalization strategy using ScaLAPACK and PBLAS libraries.
-* psmnewma_minPRBO.f90 - implements the minPRBO strategy using ScaLAPACK and PBLAS libraries.
-
+# Compiling
+A Makefile file is provided showing the required libraries for running the different programs.
 
 # Examples
-Example data obtained by the different strategies and the parameters used are in the EXAMPLES folder. A GNUPLOT file to plot the data and example plots are also provided.
+Example data obtained by the different strategies and the parameters used are in the EXAMPLES folder. A simple GNUPLOT program to plot the data and example plots are also provided.
 
 
