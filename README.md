@@ -26,7 +26,11 @@ The sample programs provided carry out this minimal partial rebiorthogonalizatio
 * planczos_minprbo.f90 -  this contains a parallel version of the minPRBO strategy using SCALAPACK and PBLAS libraries.
 
 # Compilation
-A Makefile file is provided showing the required libraries for compiling the different programs. All programs can be compiled by typing "Make".
+A Makefile file is provided showing the required libraries for compiling the different programs. All programs can be compiled by typing 
+
+```
+Make
+```
 
 # Execution
 ## serial programs
