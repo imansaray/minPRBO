@@ -48,7 +48,7 @@ mpirun -n 4 planczos_full
 Example data obtained by the different strategies and the parameters used are in the EXAMPLES folder. A simple GNUPLOT program to plot the data and example plots are also provided.
 
 # References
-* [1] Onida, Giovanni, Lucia Reining, and Angel Rubio. "Electronic excitations: density-functional versus many-body Green’s-function approaches." Reviews of modern physics 74.2 (2002): 601.
-* [2] Simon, Horst D. "The Lanczos algorithm with partial reorthogonalization." Mathematics of computation 42.165 (1984): 115-142.
-* [3] Bai, Zhaojun, David Day, and Qiang Ye. "ABLE: an adaptive block Lanczos method for non-Hermitian eigenvalue problems." SIAM Journal on Matrix Analysis and Applications 20.4 (1999): 1060-1082.
-* [4] Walker, Brent, et al. "Efficient Approach to Time-Dependent Density-Functional Perturbation Theory<? format?> for Optical Spectroscopy." Physical review letters 96.11 (2006): 113001.
+- [1] Onida, Giovanni, Lucia Reining, and Angel Rubio. "Electronic excitations: density-functional versus many-body Green’s-function approaches." Reviews of modern physics 74.2 (2002): 601.
+- [2] Simon, Horst D. "The Lanczos algorithm with partial reorthogonalization." Mathematics of computation 42.165 (1984): 115-142.
+- [3] Bai, Zhaojun, David Day, and Qiang Ye. "ABLE: an adaptive block Lanczos method for non-Hermitian eigenvalue problems." SIAM Journal on Matrix Analysis and Applications 20.4 (1999): 1060-1082.
+- [4] Walker, Brent, et al. "Efficient Approach to Time-Dependent Density-Functional Perturbation Theory<? format?> for Optical Spectroscopy." Physical review letters 96.11 (2006): 113001.
