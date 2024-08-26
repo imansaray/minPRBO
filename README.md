@@ -34,8 +34,15 @@ Make
 
 # Execution
 ## serial programs
-
+All serial programs can be run in the usual manner by running the executable file, for example
+```
+./lanczos
+```
 ## parallel programs
+For the parallel programs, mpirun or mpiexec can be used to run the compiled programs with the number of processors specified. For example
+```
+mpirun -n 4 planczos_full
+```
 
 # Example data
 Example data obtained by the different strategies and the parameters used are in the EXAMPLES folder. A simple GNUPLOT program to plot the data and example plots are also provided.
