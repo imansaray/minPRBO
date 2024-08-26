@@ -1,11 +1,11 @@
-program planczos_pro
+program planczos_minprbo
         ! This program carries out the non hermitian lanczos algorithm on a given matrix
         ! hermitian or non hermitian, using the matrix * matrix * vector operation in parallel, 
         ! following the template from the parallel_lu_solve.  
         ! Only processor (0,0) will carry out the Lanczos process for now, and then
         ! when there's a need to orthogonalize, will do this mmv product in parallel, 
         ! and collect the new vector from the parallel mmv at processor (0,0).
-        ! A partial reorthogonalization is carried out in this program based on some
+        ! A minimal partial rebiorthogonalization is carried out in this program based on some
         ! set tolerance value eps1 = f(eps), some fraction of the machine precision eps.
         !
 
@@ -2014,7 +2014,7 @@ program planczos_pro
         write(6,*) " "
         return
         end subroutine lanc_non_herm_pro_1
-end program planczos_pro
+end program planczos_minprbo
 
 
 
