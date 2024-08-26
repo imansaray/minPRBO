@@ -36,5 +36,5 @@ lanczos: lanczos.f90
 planczos_full: planczos_full.f90
 	$(PCF) -o planczos_full $(POPT) planczos_full.f90 $(PLIBS)
 
-planczos_prbo: planczos_minprbo.f90
-	$(PCF) -o planczos_prbo $(POPT) planczos_prbo.f90 $(PLIBS)
+planczos_minprbo: planczos_minprbo.f90
+	$(PCF) -o planczos_minprbo $(POPT) planczos_minprbo.f90 $(PLIBS)
