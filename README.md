@@ -5,4 +5,6 @@ The Bethe-Salpeter equation (BSE) approach is the state-of-the-art in the calcul
 
 Iterative methods are a preferred alternative as they make it possible to complete calculations within a reasonable amount of time. The Lanczos based methods are quite popular in the community becasue of their ease of implementation and computational efficiency. The Tamm-Dancoff approximation (TDA) to the BSE reduces the computational complexity even further by ignoring certain blocks of the full BSE Hamiltonian which correspond to negative energy electron-hole pairs, rendering the problem Hermitian, which can be readily solved by the Hermitian Lanczos algorithm.
 
+# minPRBO
+
 Certain material systems like silicon 
