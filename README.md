@@ -14,6 +14,12 @@ In order to be able to calculate the IMFP, one requires the ELF to be sampled re
 In that implementation of the partial reorthogonalization strategy of Horst D. Simon applied to the non-Hermitian case (which will be termed as partial rebiorthogonalization due to the need to keep two sets of Lanczos vectors), when it was deemed necessary to carry out a reorthogonalization of the Lanczos vectors, a full rebiorthogonalization step was carried out with respect to all the previous Lanczos vectors, then a second full rebiorthogonalization step of the Lanczos vectors was carried out in the subsequent iteration to maintain semi-biorthogonality. This is considerably cheaper than carrying out a full rebiorthogonalization of the Lanczos vectors at each iteration, which will bring the computational costs on par with a GMRES calculation.
 
 We contend that this approach to partial reorthogonalization for the non-Hermitian case can still be improved upon, especially given the application to the calculatioin of the IMFP that we have in mind.
-We propose to do the minimum number of rebiorthogonalizations of the Lanczos vectors whilst still maintaining their semi-orthogonality. This is achieved by only rebiorthogonalizing the Lanczos vectors to those with which they have lost semi-biorthogonality. This is shown to be sufficient to maintain semi-orthogonality and also achieve calculated spectra that are as accurate as the GMRES obtained spectra, with errors on the order of less than one percent.
+We propose to do the minimum number of rebiorthogonalizations of the Lanczos vectors whilst still maintaining their semi-biorthogonality. This is achieved by only rebiorthogonalizing the Lanczos vectors to those with which they have lost semi-biorthogonality. This is shown to be sufficient to maintain semi-biorthogonality and also obtain calculated spectra that are as accurate as the GMRES spectra, with errors on the order of less than one percent.
 
-The sample programs provided carry out this minimal partial rebiorthogonalization (minPRBO) on model Hamiltonians and calcualtes the dielectric function and compares them to the exact solution.
+The sample programs provided carry out this minimal partial rebiorthogonalization (minPRBO) strategy on model Hamiltonians and an ab initio Hamiltonian for silicon and calcualtes the dielectric function and compares them to the exact solution when possible and to GMRES.
+
+# List of provided programs
+
+
+
+
