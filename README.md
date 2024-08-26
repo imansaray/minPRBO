@@ -1,4 +1,4 @@
-# minPRBO
+# BSE
 minPRBO (minimal partial rebiorthogonalization) is a variant of the partial reorthogonalization strategy of Horst D. Simon that is particulary suited for the kinds of non-Hermitian Hamiltonians that occur witihin the context of ab initio calculations of  optical spectra of solids.
 
 The Bethe-Salpeter equation (BSE) approach is the state-of-the-art in the calculation of ab initio optical spectra of materials at all scales (small molecules, extended systems, solids). One important step in the calculation is that of obtaining the matrix element of the resolvent of the effective Hamiltonian. A direct method would involve the inversion of a very large operator/matrix, that is in general non-Hermitian, which becomes computationally intensive and impractical for realistic systems.
@@ -12,6 +12,7 @@ GMRES obtains the dielectric function and subsequently the ELF by solving a new 
 
 In order to be able to calculate the IMFP requires the ELF to be sampled reasonably well at different momentum transfer over the desired energy range (0 to 100 eV). We seek an iterative approach that is as versatile as the Hermitian Lanczos algorithm for the TDA and as accurate as GMRES for the non-Hermitian full BSE Hamiltonian. The non-Hermtian Lanczos algorithm fits this bill and has been used before to calculate the optical spectra of a small molecule Benzene.
 
+# minPRBO
 In that implementation of partial reorthogonalization applied to the non-Hermitian case, when it was deemed necessary to carry out a reorthogonalization of the Lanczos vectors, a full reorthogonalization step was carried out with respect to all the previous Lanczos vectors, then a second full reorthogonalization step of the Lanczos vectors was carried out in the subsequent iteration to maintain semi-orthogonality. This is considerably cheaper than carrying out a full reorthogonalization of the Lanczos vectors at each iteration, which will bring the computational costs on par with a GMRES calculation.
 
 We contend that this approach to partial reorthogonalization for the non-Hermitian case can still be improved upon, especially given the application to the calculatioin of the IMFP that we have in mind.
