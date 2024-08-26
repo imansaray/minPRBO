@@ -5,6 +5,5 @@ The Bethe-Salpeter equation (BSE) approach is the state-of-the-art in the calcul
 
 Iterative methods are a preferred alternative as they make it possible to complete calculations within a reasonable amount of time. The Lanczos based methods are quite popular in the community becasue of their ease of implementation and computational efficiency. The Tamm-Dancoff approximation (TDA) to the BSE reduces the computational complexity even further by ignoring certain blocks of the full BSE Hamiltonian which correspond to negative energy electron-hole pairs, rendering the problem Hermitian, which can be readily solved by the Hermitian Lanczos algorithm.
 
-# minPRBO
-
-Certain material systems like silicon 
+# IMFP
+In certain material systems like silicon with strong electron-hole interactions, the TDA has been known to be inadequate in accurately describing some quantities like the energy loss function (ELF). To get ELF spectra that closely matches the experimental one, it is crucial to solve the full BSE Hamiltonian. This non-Hermitian Hamiltonian can be solved with the generalized minimal residual (GMRES) algorithm, a well-known highly accurate and stable algorithm that works for Hermitian and non-Hermitian operators. 
