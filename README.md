@@ -16,7 +16,7 @@ The non-Hermitian Lanczos algorithm requires two sets of Lanczos vectors and so 
 We contend that this approach to partial reorthogonalization for the non-Hermitian case can still be improved upon especially given the application we have in mind, that of the calculatioin of the IMFP.
 We propose to do the minimum number of rebiorthogonalizations of the Lanczos vectors whilst still maintaining their semi-biorthogonality. This is achieved by only rebiorthogonalizing the Lanczos vectors against those with which they have lost semi-biorthogonality. This is shown to be sufficient to maintain semi-biorthogonality and the calculated spectra are as accurate as the GMRES spectra, with errors on the order of less than one percent.
 
-The sample programs provided carry out this minimal partial rebiorthogonalization (minPRBO) strategy on model Hamiltonians and on an ab initio Hamiltonian for silicon with complex energies that mimimcs the effects of phonons and calcualtes the dielectric function and compares them to the exact solution when possible and to the GMRES obtained solution.
+The sample programs provided carry out this minimal partial rebiorthogonalization (minPRBO) strategy on model Hamiltonians and on an ab initio Hamiltonian for silicon with complex energies that mimics the effects of phonons and calcualtes the dielectric function and compares them to the exact solution when possible and to the GMRES obtained solution.
 
 # List of provided programs
 
