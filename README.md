@@ -41,7 +41,7 @@ All serial programs can be run in the usual manner by running the executable fil
 ## parallel programs
 For the parallel programs, mpirun or mpiexec can be used to run the compiled programs with the number of processors specified. For example
 ```
-mpirun -n 4 planczos_full
+mpirun -n 4 ./planczos_full
 ```
 
 # Example data
