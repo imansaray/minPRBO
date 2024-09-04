@@ -11,3 +11,5 @@ The loss of orthogonality/biorthogonality calculated via the Frobenius norm of t
 The files resolvent_***.dat contain the dielectric function.
 
 orthinfo_***.dat gives information about the PRBO strategies.
+
+lanc_coeffs_***.dat contain the Lanczos coefficients for the different algorithms.
