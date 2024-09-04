@@ -1,4 +1,6 @@
-# For the example Hamiltonian used in lanczos.f90, all spectra are calculated with eta = 0.1 and the spectral range is set by the variable spect_range. 
+## For the example Hamiltonian used in lanczos.f90, all spectra are calculated with eta = 0.1 and the spectral range is set by the variable spect_range. 
 
-# In realistic Hamiltonians that are non-Hermitian, the Lanczos coefficients obtained with the non-Hermitian Lanczos algorithm and its 
+## In realistic Hamiltonians that are non-Hermitian, the Lanczos coefficients obtained with the non-Hermitian Lanczos algorithm and its 
 variants are generally complex, and have non-zero imaginary part. In this case, one sets eta = 0.0 when calcualting the spectrum.
+
+## The simplicity of the model Hamiltonian used means that all algorithms give almost the same spectrum as the exactly calculated spectrum.
