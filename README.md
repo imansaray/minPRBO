@@ -18,13 +18,6 @@ We propose to do the minimum number of rebiorthogonalizations of the Lanczos vec
 
 The sample programs provided carry out this minimal partial rebiorthogonalization (minPRBO) strategy on model Hamiltonians and on an ab initio Hamiltonian for silicon with complex energies that mimics the effects of phonons and calcualtes the dielectric function and compares them to the exact solution when possible and to the GMRES obtained solution.
 
-# List of provided programs
-
-## Model Hamiltonians
-* lanczos.f90 - this contains implementations of the Hermitian Lanczos algorithm with full and partial reorthogonalization (PRO), the nonsymmetric Lanczos algorithm for real matrices, and the non Hermitian Lanczos algorithm with full rebiorthogonalization, minPRBO and partial rebiorthogonalization as originally proposed and the exact calculation of the dielectric function.
-* planczos_full.f90 - this contains a parallel version of the full rebiorthogonalization strategy using ScaLAPACK and PBLAS libraries.
-* planczos_minprbo.f90 -  this contains a parallel version of the minPRBO strategy using SCALAPACK and PBLAS libraries.
-
 # Compilation
 A Makefile file is provided showing the required libraries for compiling the different programs. All programs can be compiled by typing 
 
