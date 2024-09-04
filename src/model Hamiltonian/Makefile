@@ -1,40 +1,25 @@
 .SUFFIXES: .o .f90
+OPT = -g -fbacktrace -fcheck=all 
+#-Wall
+#-fdump-tree-original  
 
-#--- compilers, CF got serial, PCF for parallel ----
+#--- compilers ----
 CF = gfortran
-# CF = ifort
+#CF = ifort
 #
 #--- MPI ----
-#PCF = mpif90
-PCF = mpiifort
-#PCF = mpiicc
+#CF = mpif90
+#CF = mpiicc
 
-OPT = 
-#OPT = -fdefault-real-8 
-POPT = -g -traceback -fp-stack-check -check bounds
-
-#---- Libraries, LIBS for serial, PBLIBS for parallel
-LIBS = -lm -lgfortran -lblas -llapack  
-PLIBS = -lm -lgfortran -lscalapack -lblas -llapack  
+#LIBS =  /share/sw/lapack/3.9.0/gcc-9/lib/liblapack.a
+CFT = $(CF) -c $(OPT)
 
 RM = rm -f
 
-# Serial codes are listed first, then parallel codes
-all: lanczos planczos_full planczos_minprbo	
-
+all: lanczos 
 
 clean:
 	$(RM) *.o
 
-# Serial Code
 lanczos: lanczos.f90
-	$(CF) -o lanczos $(OPT) lanczos.f90 $(LIBS)
-
-
-# Parallel code
-
-planczos_full: planczos_full.f90
-	$(PCF) -o planczos_full $(POPT) planczos_full.f90 $(PLIBS)
-
-planczos_minprbo: planczos_minprbo.f90
-	$(PCF) -o planczos_minprbo $(POPT) planczos_minprbo.f90 $(PLIBS)
+	$(CF) -o lanczos $(OPT) lanczos.f90 -lm -llapack -lblas  
