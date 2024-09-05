@@ -1,9 +1,29 @@
 The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data 
-is obtained with OCEAN, and a serial code based on the NBSE code is used to carry out the calculation of the dielectric function.
+is obtained with OCEAN with input file Si.in, and a serial code based on the NBSE code is used to carry out the calculation of the dielectric function.
 
-Input files to edit for doing runs:
+MAIN PROGRAMS 
 
-niter.h : this contains options for the number of Lanczos iterations, different flags to turn on/off parts of the elctron hole interaction, 
+     serial code
+          smnewma.f90 : the Hermitian Lanczos algorithm and GMRES are implemented in smnewma.f90. Each case
+               is selected with 'hay' for Hermitian Lanczos, 'inv' for GMRES that is set in the code with the
+                variable 'meth'.
+
+          smnewma_nherm.f90 : this implements the non-Hermitian Lanczos algorithm with the different variants
+                 minimal partial rebiorthogonalization (minPRBO), partial rebiorthogonalization (PRBO) 1 and 2.
+                 These options can be set by choosing the respective subroutine in the code.
+
+          spectrum.f : used to calculate the complex dielectric function and other derived quantities from the Hermitian Lanczos 
+                       coefficients (all real numbers) obtained from smnewma.f90.
+
+          zspectrum.f : used to calculate the complex dielectric function and other derived quantities from the non-Hermitian Lanczos 
+                       coefficients (comlex numbers) obtained from smnewma.f90.
+     parallel code
+          psmnewma_nherm_minprbo.f90 : a parallel implementation of minPRBO which produces the non-Hermitian Lanczos coefficients
+                       that can be used with zspectrum.f to obtain the optical quantities. 
+
+INPUT FILES TO EDIT FOR DOING RUNS
+
+niter.h : this contains options for the number of Lanczos iterations, different flags to turn on/off parts of the electron hole interaction, 
 quasiparticle corrections, a full BSE calculation and whether a non Hermitian Hamiltonian is been used
          niter - the number of Lanczos iterations
          bflag - to turn on/off the "bubbles"/exchange part of BSE interaction kernel
@@ -15,12 +35,14 @@ quasiparticle corrections, a full BSE calculation and whether a non Hermitian Ha
          bande - for including one-electron band-energy differences for an exciton
          nonhe - to do a non-Hermitian Lanczos tridiagonalization
 
+*** ALL RUNS ARE DONE WITHIN THE TAMM-DANCOFF APPROXIMATION (TDA), WITH QUASIPARTICLE CORRECTIONS DONE BY THE 'SCISSORS' METHOD. HENCE backf = aldaf = bwflg = 0 FOR ALL RUNS. ***
+
 ortho_flag : 
-           biortho - to decide whether to do any rebiorthogonalization
-           full - and full or minprbo or other variants.
+           biortho - to decide whether to do any rebiorthogonalizations
+           full - carrying out full rebiorthogonalization or minprbo or other variants.
 
 gmres_in :  file to set the parameters for the GMRES calculations done with smnewma.f90
-         nloop - number of loops for this restarted GMRES
+         nloop - number of loops for the restarted GMRES
          gres -  small imaginary broadening added
          gprc - preconditioning factor
          f(1) - tolerance for the residual
@@ -28,7 +50,7 @@ gmres_in :  file to set the parameters for the GMRES calculations done with smne
          de - energy step
          emax - maximum energy value
 
-scal_ze : sets the value of sigma, the factor for the complex energy
+scal_ze : sets the value of sigma, the scaling factor for the complex energy added to the one-particle energy differences
 
 spect.ipt : contains parameters for calculating the dielectric function and other quantities with
             spectrum.f (Hermitian Lanczos, real coefficients), zspectrum.f (Non-Hermtian Lanczos, complex coefficients)
@@ -38,11 +60,17 @@ spect.ipt : contains parameters for calculating the dielectric function and othe
            ne - number of energy ponts
            niter - numer of Lanczos iterations
 
-Main programs : 
-          smnewma.f90 - the Hermitian Lanczos algorithm and GMRES are implemented in smnewma.f90. Each case
-               is selected with 'hay' for Hermitian Lanczos, 'inv' for GMRES.
+Specifically for parallel code
 
-          smnewma_nherm.f90 - this implements the non-Hermitian Lanczos algorithm with the different variants
-                 minimal partial rebiorthogonalization (minPRBO), partial rebiorthogonalization 1 and 2.
+block.in : for the parallel code psmnewma_nherm_minprbo.f90. This sets the block sizes for partitioning
+           of matrices used in rebiorthogonalization carried out in parallel with scaLAPACK.
+           Contains the integers: block_size_thresh, block_size_opt, block_size_m
+           block_size_thresh - the number of Lanczos iterations is compared to this threshold to determine
+                               how the columns of the matrix are divided.
+           block_size_opt - the number of columns depends on the Lanczos iteration, this is used to set a reasonable value.
+           block_size_m - integer to split up the number of rows of the Hamiltonian amongst processors.
 
-          psmnewma_nherm_minprbo.f90 - a parallel implementation of minPRBO. 
+runit : a sample slurm script for running psmnewma_nherm_minprbo.f90
+
+
+
