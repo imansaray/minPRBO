@@ -1,1 +1,33 @@
+The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data is obtained with OCEAN, and a serial code based on the NBSE code is used to carry out the calculation of the 
+dielectric function.
 
+Input files to edit for doing runs:
+
+niter.h : this contains options for the number of Lanczos iterations, different flags to turn on/off parts of the elctron hole interaction, quasiparticle corrections, a full BSE calculation and whether a non Hermitian 
+Hamiltonian is been used
+         niter - the number of Lanczos iterations
+         bflag - to turn on/off the "bubbles"/exchange part of BSE interaction kernel
+         lflag - to turn on/off the "ladders"/direct part of the BSE interaction kernel
+         backf - to turn on/off time reversal symmetry
+         aldaf -  for including time-dependent LDA
+         qpflg - for correcting DFT energies 
+         bwflg - to include backwards going pairs for full BSE
+         bande - for including one-electron band-energy differences for an exciton
+         nonhe - to do a non-Hermitian Lanczos tridiagonalization
+
+ortho_flag : 
+           biortho - to decide whether to do any rebiorthogonalization
+           full - and full or minprbo or other variants.
+
+gmres_in :  file to set the parameters for the GMRES calculations done with smnewma.f90
+         nloop - number of loops for this restarted GMRES
+         gres -  small imaginary broadening added
+         gprc - preconditioning factor
+         f(1) - tolerance for the residual
+         ener - starting energy value
+         de - energy step
+         emax - maximum energy value
+
+scal_ze : sets the value of sigma, the factor for the complex energy
+        
+        
