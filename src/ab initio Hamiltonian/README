@@ -13,7 +13,8 @@ MAIN PROGRAMS
                  These options can be set by choosing the respective subroutine in the code.
 
           spectrum.f : used to calculate the complex dielectric function and other derived quantities from the Hermitian Lanczos 
-                       coefficients (all real numbers) obtained from smnewma.f90.
+                       coefficients (all real numbers) obtained from smnewma.f90. The dielectric function from the GMRES calculation is
+                       written to file at the end of the GMRES calculation. The name of the file can be set in smnewma.f90.
 
           zspectrum.f : used to calculate the complex dielectric function and other derived quantities from the non-Hermitian Lanczos 
                        coefficients (comlex numbers) obtained from smnewma.f90.
@@ -35,7 +36,7 @@ quasiparticle corrections, a full BSE calculation and whether a non Hermitian Ha
          bande - for including one-electron band-energy differences for an exciton
          nonhe - to do a non-Hermitian Lanczos tridiagonalization
 
-*** ALL RUNS ARE DONE WITHIN THE TAMM-DANCOFF APPROXIMATION (TDA), WITH QUASIPARTICLE CORRECTIONS DONE BY THE 'SCISSORS' METHOD. HENCE backf = aldaf = bwflg = 0 FOR ALL RUNS. ***
+*** ALL RUNS ARE DONE WITHIN THE TAMM-DANCOFF APPROXIMATION (TDA), WITH QUASIPARTICLE CORRECTIONS DONE BY THE 'SCISSORS' METHOD. HENCE backf = aldaf = bwflg = 0, qpflg = 1 FOR ALL RUNS. ***
 
 ortho_flag : 
            biortho - to decide whether to do any rebiorthogonalizations
