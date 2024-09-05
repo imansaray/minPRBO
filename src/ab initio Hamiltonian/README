@@ -1,5 +1,5 @@
 The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data 
-is obtained with OCEAN with input file Si.in, and a serial code based on the NBSE code is used to carry out the calculation of the dielectric function.
+is obtained with OCEAN with input file Si.in, pseudo-potential file from PseudoDojo, and a serial codes based on the AI2NBSE codes is used to carry out the calculation of the dielectric function.
 
 MAIN PROGRAMS 
 
