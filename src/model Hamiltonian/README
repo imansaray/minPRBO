@@ -1,1 +1,4 @@
+lanczos.f90 contains implementation of the Hermitian Lanczos algorithm with no reorthogonalization and full reorthogonalization, and implementation of the non symmetric Lanczos algorithm (for real matrices), and the non-Hermitian
+Lanczso algorithm complex non-Hermitian matrices. It carries out full, partial rebiorthogonalization as initially described in the literature, and minimal partial rebiorthogonalization that we propose for solid state non-Hermitian Hamiltonians.
+
 
