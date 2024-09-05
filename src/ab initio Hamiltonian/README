@@ -29,5 +29,20 @@ gmres_in :  file to set the parameters for the GMRES calculations done with smne
          emax - maximum energy value
 
 scal_ze : sets the value of sigma, the factor for the complex energy
-        
-        
+
+spect.ipt : contains parameters for calculating the dielectric function and other quantities with
+            spectrum.f (Hermitian Lanczos, real coefficients), zspectrum.f (Non-Hermtian Lanczos, complex coefficients)
+           gam - small, constant imaginary broadening, same as gres for the GMRES runs
+           el - lower bound of the energy
+           eh - upper bound of the energy range
+           ne - number of energy ponts
+           niter - numer of Lanczos iterations
+
+Main programs : 
+          smnewma.f90 - the Hermitian Lanczos algorithm and GMRES are implemented in smnewma.f90. Each case
+               is selected with 'hay' for Hermitian Lanczos, 'inv' for GMRES.
+
+          smnewma_nherm.f90 - this implements the non-Hermitian Lanczos algorithm with the different variants
+                 minimal partial rebiorthogonalization (minPRBO), partial rebiorthogonalization 1 and 2.
+
+          psmnewma_nherm_minprbo.f90 - a parallel implementation of minPRBO. 
