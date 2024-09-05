@@ -1,10 +1,10 @@
-The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data is obtained with OCEAN, and a serial code based on the NBSE code is used to carry out the calculation of the 
-dielectric function.
+The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data 
+is obtained with OCEAN, and a serial code based on the NBSE code is used to carry out the calculation of the dielectric function.
 
 Input files to edit for doing runs:
 
-niter.h : this contains options for the number of Lanczos iterations, different flags to turn on/off parts of the elctron hole interaction, quasiparticle corrections, a full BSE calculation and whether a non Hermitian 
-Hamiltonian is been used
+niter.h : this contains options for the number of Lanczos iterations, different flags to turn on/off parts of the elctron hole interaction, 
+quasiparticle corrections, a full BSE calculation and whether a non Hermitian Hamiltonian is been used
          niter - the number of Lanczos iterations
          bflag - to turn on/off the "bubbles"/exchange part of BSE interaction kernel
          lflag - to turn on/off the "ladders"/direct part of the BSE interaction kernel
