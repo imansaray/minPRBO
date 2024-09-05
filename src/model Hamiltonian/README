@@ -3,5 +3,5 @@ and the non-Hermitian Lanczos algorithm for complex non-Hermitian matrices.
 
 It carries out full, partial rebiorthogonalization as initially described in the literature, and minimal partial rebiorthogonalization that we propose for solid state non-Hermitian Hamiltonians.
 
-
+When carrying out reorthogonalization or rebiorthogonalization, there are different ways of carrying out the Gram-Schmidt process with varying costs and stability. Differnt options are implemented in the code.
 
