@@ -1,0 +1,106 @@
+calc.mode val
+pp_list { si.fhi.UPF }
+para_prefix{ mpirun -n 64 }
+dft qe
+
+# For GMRES
+#bse.val.solver gmres
+#bse.val.gmres.echamp .false.
+#bse.val.gmres.estyle range
+#bse.val.gmres.erange { 0.0 20 1.0 }
+#bse.val.gmres.ffff 5d-8
+#bse.val.gmres.gprc .8
+#bse.val.gmres.nloop 10
+
+#bse.val_stop 24
+#bse.con_start 1
+
+# For GW
+bse.val.gw.control cstr
+bse.val.gw.cstr.abs_gap T
+bse.val.gw.cstr.gap 1.11
+
+
+
+# If you want to turn off interactions
+bse.val.lflag true
+bse.val.aldaf false
+bse.val.bwflg false
+bse.val.bflag true
+
+nbse.spect_range{ 2000 0 20 }
+
+# Kpt mesh (N1,N2,N3)
+nkpt { 16 16 16 }
+ngkpt{ 8 8 8 }
+
+# Photon momentum
+#photon_q { 0.0001   0.0001    0.0001 }
+calc.cartesian_q.q.direction{ 1 1 1 }
+calc.cartesian_q.q.magnitude 0.0001
+
+
+#screen.nkpt{ 2 2 2 }
+#screen.nbands { 200 }
+#screen.mode grid
+#screen.wvfn qe54
+#screen.lmax 0
+#screen.grid.nr 40
+#screen.grid.ang 7
+
+
+# Total bands
+nbands 24
+
+# Mag.of latt.vec1,latt.vec 2,latt.vec.3
+acell { 10.26 10.26 10.26 }
+
+# Cart. comps. latt.vecs
+rprim {
+ 0.0 0.5 0.5
+ 0.5 0.0 0.5
+ 0.5 0.5 0.0
+}
+
+# Ntypes of atoms
+ntypat 1
+
+# Nuclear charge for type (typ1,type2,...)
+znucl { 14 }
+
+# Number of Atoms in unit cell
+natom 2
+
+# Type of each atom (atom1,atom2)
+typat { 1 1 }
+
+# Postitions of atoms1,2, etc. in units latt. vecs.
+xred {
+ 0.00    0.00    0.00
+ 0.25    0.25    0.25
+}
+
+# Kinetic Energy cutoff
+ecut 100
+
+# Energy tol
+toldfe 1.0d-6
+
+# wftol
+tolwfr 1.0d-16
+
+# iterations
+nstep 50
+
+# Static dielectric const.
+diemac 11.4
+
+#Brodening
+bse.val.broaden .1
+
+# xmesh
+bse.xmesh { 8  8  8 }
+
+
+# niter
+NBSE.niter 100
