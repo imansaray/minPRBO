@@ -1,0 +1,9 @@
+    100          niter
+      0          bflag
+      0          lflag
+      0          backf
+      0          aldaf
+      1          qpflg
+      0          bwflg
+      1          bande
+      1          nonhe
