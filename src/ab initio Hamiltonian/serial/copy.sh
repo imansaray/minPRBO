@@ -1,0 +1,86 @@
+#! /bin/bash
+
+# Simple script to do copying of files
+
+# obtain the spectra from a.dat, b.dat, c.dat
+#./zspectrum.x
+#./spectrum.x
+
+# Copy the files
+#cp a.dat a_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp b.dat b_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_1_l_1
+##cp f.dat f_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_1_l_0
+#cp opcons.dat opcons_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_1_l_1
+
+
+
+#cp a.dat a_tda_nherm_full_cmplx_nrg_gam_1E_0_scal_1E_m1_b_0_l_0
+#cp b.dat b_tda_nherm_full_cmplx_nrg_gam_1E_0_scal_1E_m1_b_0_l_0
+#cp c.dat c_tda_nherm_full_cmplx_nrg_gam_1E_0_scal_1E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_full_cmplx_nrg_gam_1E_0_scal_1E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_pro_cmplx_nrg_gam_1E_0_scal_m1E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_full_ne_400_gam_1E_m1_b_0_l_0
+
+#cp a.dat a_tda_nherm_pro_cmplx_nrg_gam_1E_0_scal_m1E_m1_b_0_l_0
+#cp b.dat b_tda_nherm_pro_cmplx_nrg_gam_1E_0_scal_m1E_m1_b_0_l_0
+#cp c.dat c_tda_nherm_pro_cmplx_nrg_gam_1E_0_scal_m1E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_pro_cmplx_nrg_gam_1E_0_scal_m1E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_pro_cmplx_nrg_gam_1E_0_scal_m1E_m1_b_0_l_0
+
+#cp a.dat a_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp b.dat b_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp c.dat c_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp orthinfo orthinfo_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+#cp a.dat a_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp b.dat b_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp c.dat c_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp f.dat f_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp im_a.dat im_a_tda_nherm_pro2_reps_1E_m1_scal_0E_m1_b_1_l_1
+#cp opcons.dat opcons_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp orthinfo orthinfo_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp orth_lev.dat orth_lev_tda_nherm_pro2_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+
+#cp a.dat a_tda_nherm_niter_200_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp b.dat b_tda_nherm_niter_200_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp c.dat c_tda_nherm_niter_200_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_niter_200_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp im_a.dat im_a_tda_nherm_niter_200_no_1E_m1_scal_0E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_niter_200_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp orthinfo orthinfo_tda_nherm_niter_200_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp orth_lev.dat orth_lev_tda_nherm_niter_200_no_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+#cp a.dat a_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp b.dat b_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp c.dat c_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp im_a.dat im_a_tda_nherm_full_1E_m1_scal_0E_m1_b_0_l_0
+#cp orthinfo orthinfo_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+#cp a.dat a_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp b.dat b_tda_nherm_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp c.dat c_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp orthinfo orthinfo_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+#cp im_a.dat im_a_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+# Hermitian
+#cp a.dat a_tda_herm_no_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp b.dat b_tda_herm_no_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp c.dat c_tda_nherm_pro_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp f.dat f_tda_nherm_pro_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp im_a.dat im_a_tda_nherm_pro_reps_1E_m1_scal_0E_m1_b_0_l_0
+#cp opcons.dat opcons_tda_herm_no_gam_1E_m1_scal_0E_m1_b_1_l_1
+#cp orthinfo orthinfo_tda_herm_no_gam_1E_m1_scal_0E_m1_b_1_l_0
+
+# Redoing IPA, minPRBO for different tolerances
+#cp orth_lev.dat orth_lev_tda_nherm_pro_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+#cp orth_lev.dat orth_lev_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+cp orth_lev.dat orth_lev_tda_nherm_pro_reps_gam_0E_m1_scal_5E_m1_b_0_l_0
+echo "All done copying files!!"
+
