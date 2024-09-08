@@ -1,6 +1,6 @@
-# Makefile to compile the subroutines for obtaining the ABINIT wave functions, densities, potentials
+# Makefile to compile the subroutines for obtaining the Quantum Espresso's wave functions, densities, potentials
 # and putting them into form compatible with Eric SHirley's NBSE codes
-# When using Erics latest smlsauber, its correct version is in ldriver.f90.
+
 .SUFFIXES: .f .x .f90
 FC = gfortran
 
@@ -9,13 +9,6 @@ PREPFILES   = tmelnew.x frmtwf.x whom0.x nelectron.x rhoofg.x datagen.x setup2.x
 	      conugtoux.x orthog.x condens2.x ll.x bridgelad.x bridgegw.x
 
 BSEFILES = smnewma.x smnewma_nherm.x spectrum.x zspectrum.x
-#BSEFILES = smnewma_nherm.x spectrum.x zspectrum.x
-#BSEFILES = smnewma.x spectrum.x zspectrum.x
-#BSEFILES = smnewma_herm_no.x smnewma_herm_resolv.x spectrum.x zspectrum.x
-#BSEFILES = smnewma_herm_resolv.x spectrum.x zspectrum.x
-
-# Scripts, will leave out for now
-#SCRIPTS = dendip.script int2.pl bvecs.pl dos.pl gvecs2.pl fermi.pl ofermi.pl dendip.pl
 
 # Object files
 #
@@ -31,15 +24,6 @@ BRIDGELAD_OBJS = bridgelad.f90 lxb_getval.o formx.o cross.o getspacings.o dist.o
 BRIDGEGW_OBJS = bridgegw.f90 lxb_getval.o
 
 # --- BSE STAGE ---
-BSE_OBJS = lxb_getval.o formx.o kmapr.o getwgt.o getumat.o bdallck.o uphase.o sizereport.o haydock_herm_resolv.o \
-	     act.o act_1e.o smbubble.o smkxc.o smlsauber.o adump.o invdrv.o cinvert.o coulmult.o aclip.o bfnorm.o \
-	     getband.o wvfdot.o ctrdfft.o elsdch.o jlmfft.o gradorth.o \
-	     inner.o soldrv.o subspace.o velmul.o velmuls.o  
-
-#BSE_OBJS = lxb_getval.o formx.o kmapr.o getwgt.o getumat.o bdallck.o uphase.o sizereport.o haydock_herm_resolv.o \
-#	     act_herm.o act_1e.o smbubble.o smkxc.o ldriver.o adump.o invdrv.o cinvert.o coulmult.o aclip.o bfnorm.o \
-#	     getband.o wvfdot.o ctrdfft.o elsdch.o jlmfft.o gradorth.o \
-#	     inner.o soldrv.o subspace.o velmul.o velmuls.o lpart1.o lpart2.o lpart3.o 
 
 SMNEWMA_OBJS = smnewma.f90 lxb_getval.o formx.o kmapr.o getwgt.o getumat.o bdallck.o uphase.o haydock.o act.o \
 	     act_1e.o smbubble.o smkxc.o smlsauber.o adump.o invdrv.o cinvert.o coulmult.o aclip.o bfnorm.o \
@@ -56,19 +40,11 @@ LIBS1 = -llapack -lblas
 FFTI = -I/usr/include/
 FFTWL = -L/usr/lib/x86_64-linux-gnu/ -lfftw3
 
+# Edit this to link to the stdlib in your gfortran installation
 DATAGEN_LIB = /home/ishiakasem/stdlib/build/gfortran_6C1C75E19A159722/stdlib/libstdlib.a
 DATAGEN_INCL = -I/home/ishiakasem/stdlib/build/gfortran_020AF3609BFD7C6D
 
-#all: $(FILES) wfconvert.x nelectron.x rhoofg.x datagen.x
 all: $(PREPFILES) $(BSEFILES)
-
-#install:
-#	cp $(SCRIPTS) $(FILES) $(FILESF90) $(INSTDIR)
-
-#instdev:
-#	for F in $(SCRIPTS); do ln -fs $(PWD)/$$F $(INSTDEVDIR); done;
-#	for F in $(FILES); do ln -fs $(PWD)/$$F $(INSTDEVDIR); done;
-#	for F in $(FILESF90); do ln -fs $(PWD)/$$F $(INSTDEVDIR); done;
 
 .f.x:
 	$(FC) $(OPTIONS) -o $*.x $*.f
@@ -90,9 +66,6 @@ rhoofg.x: rho2.f90
 
 nelectron.x: nelectron.f90
 	$(FC) $(OPTIONS) nelectron.f90 -o nelectron.x
-
-#datagen.x: $(DATAGEN_OBJS)
-#	$(FC) $(OPTIONS) $(DATAGEN_LIB) $(DATAGEN_OBJS) -o datagen.x 
 
 datagen.x: $(DATAGEN_OBJS)
 	$(FC) $(DATAGEN_INCL) -o datagen.x $(DATAGEN_OBJS) $(DATAGEN_LIB) 
@@ -124,12 +97,6 @@ smnewma.x: $(SMNEWMA_OBJS)
 
 smnewma_nherm.x: smnewma_nherm.f90 $(SMNEWMA2_OBJS)
 	$(FC) $(OPTIONS) smnewma_nherm.f90 $(SMNEWMA2_OBJS) -o smnewma_nherm.x $(LIBS1)
-
-#smnewma_herm_no.x: smnewma_herm_no.f90 $(BSE_OBJS)
-#	$(FC) $(OPTIONS) smnewma_herm_no.f90 $(BSE_OBJS) -o smnewma_herm_no.x $(LIBS1)
-
-#smnewma_herm_resolv.x: smnewma_herm_resolv.f90 $(BSE_OBJS)
-#	$(FC) $(OPTIONS) smnewma_herm_resolv.f90 $(BSE_OBJS) -o smnewma_herm_resolv.x $(LIBS1)
 
 spectrum.x: spectrum.o lxb_getval.o
 	$(FC) $(OPTIONS) spectrum.f lxb_getval.o -o spectrum.x
@@ -241,20 +208,11 @@ uphase.o: uphase.f90
 haydock.o: haydock.f90
 	$(FC) $(OPTIONS) haydock.f90 -c haydock.o 
 
-#haydock_herm.o: haydock_herm.f90
-#	$(FC) $(OPTIONS) haydock_herm.f90 -c haydock_herm.o 
-
-#haydock_herm_resolv.o: haydock_herm_resolv.f90
-#	$(FC) $(OPTIONS) haydock_herm_resolv.f90 -c haydock_herm_resolv.o 
-
 sizereport.o: sizereport.f90
 	$(FC) $(OPTIONS) sizereport.f90 -c sizereport.o 
 
 act.o: act.f90
 	$(FC) $(OPTIONS) act.f90 -c act.o 
-
-#act_herm.o: act_herm.f90
-#	$(FC) $(OPTIONS) act_herm.f90 -c act_herm.o 
 
 act_1e.o: act_1e.f90
 	$(FC) $(OPTIONS) act_1e.f90 -c act_1e.o 
