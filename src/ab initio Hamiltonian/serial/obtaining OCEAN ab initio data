@@ -1,0 +1,32 @@
+This is a series of instructions for how to obtain the ab initio data from an OCEAN run to use with the serial codes provided.
+It assumes that OCEAN version is already installed. This branch enables the saving of the required data into a format useable with the
+serial codes.
+
+1. Complete an OCEAN run (lets call this 'ocean_run_dir') within the TDA, using the provided input file, and pseudopotential file.
+
+2. Go into the 'ocean_run_dir/DFT' folder. There will be two folders
+with the input kpts (16 by 16 by 16), but differnt q. Go into the folder with the rational q values.
+
+3. In the 'Out' directory, there will be a 'system.save' directory containing the wave function files
+from Quantum Espresso. 
+
+4. Copy the 'system.save' directory into the directory where you want to run the serial code from (lets call this 'serial_run_dir').
+
+5. Go to ocean_run_dir/PREP/BSE, and copy the following files into the serial_run_dir: 
+       QE_EIGS.txt, QE_EIGS_shift.txt, qinunitsofbvectors.ipt,avecsinbohr.ipt,efermiinrydberg.ipt,
+       brange.ipt,kmesh.ipt,tmels.
+
+6. Go to ocean_run_dir/CNBSE and copy these to serial_run_dir:
+       ptmels.dat,rhoofr,rho2.xpts,bvecs,gap,val.u2.dat,con.u2.dat,decut.
+
+7. Check the parameters in datagen.f90 and makes sure they match that in Si.in.
+
+8. Run prep.bash to generate the necessary input files using the OCEAN data.
+
+9. After prep.bash completes succesfully, go to ocean_run_dir/PREP/BSE and copy again the following files
+   into serial_run_dir:
+       u2.dat,ptmels.dat,tmels.
+
+10. Once all the intermediate data and input files are successfully generated, you can now run the main
+    programs following the description in the README file.
+         
