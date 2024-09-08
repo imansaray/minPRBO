@@ -1,5 +1,5 @@
 This is a series of instructions for how to obtain the ab initio data from an OCEAN run to use with the serial codes provided.
-It assumes that OCEAN version is already installed. This branch enables the saving of the required data into a format useable with the
+It assumes that OCEAN version ( )is already installed. This branch enables the saving of the required data into a format useable with the
 serial codes.
 
 1. Complete an OCEAN run (lets call this 'ocean_run_dir') within the TDA, using the provided input file, and pseudopotential file.
