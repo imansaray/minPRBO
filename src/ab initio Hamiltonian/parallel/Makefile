@@ -12,18 +12,8 @@ POPT = -g -traceback -fp-stack-check -check bounds
 PREPFILES   = tmelnew.x frmtwf.x whom0.x nelectron.x rhoofg.x datagen.x setup2.x \
 	      conugtoux.x orthog.x condens2.x ll.x bridgelad.x bridgegw.x
 
-#BSEFILES = smnewma.x smnewma2.x spectrum.x zspectrum.x psmnewma_nherm_full.x \
-#	   psmnewma_nherm_pro.x
-
-BSEFILES = spectrum.x zspectrum.x psmnewma_nherm_full.x \
-	   psmnewma_nherm_pro.x
-
-#BSEFILES = spectrum.x zspectrum.x smnewma_nherm.x
-
-
-# Scripts, will leave out for now
-#SCRIPTS = dendip.script int2.pl bvecs.pl dos.pl gvecs2.pl fermi.pl ofermi.pl dendip.pl
-
+BSEFILES = spectrum.x zspectrum.x psmnewma_nherm_pro.x \
+	
 # Object files
 #
 # --- PREP STAGE ----
@@ -61,25 +51,17 @@ LIBS2 = -lm -lgfortran -lscalapack -llapack -lblas #-llapack
 FFTI = -I/usr/local/almalinux9/inteloneapi/2023.0.0/mkl/2023.0.0/include/fftw/
 FFTWL = -lfftw3
 
+# Edit this to link to your stdlib from your gfortran installation
 DATAGEN_LIB = #/home/ishiakasem/stdlib/build/gfortran_6C1C75E19A159722/stdlib/libstdlib.a
 DATAGEN_INCL = #-I/home/ishiakasem/stdlib/build/gfortran_020AF3609BFD7C6D
 
 # Make and clean
 RM = rm -f
-#all: $(FILES) wfconvert.x nelectron.x rhoofg.x datagen.x
-#all: $(PREPFILES) $(BSEFILES)
-all: $(BSEFILES)
+
+all: $(PREPFILES) $(BSEFILES)
 
 clean:
 	$(RM) *.o
-
-#install:
-#	cp $(SCRIPTS) $(FILES) $(FILESF90) $(INSTDIR)
-
-#instdev:
-#	for F in $(SCRIPTS); do ln -fs $(PWD)/$$F $(INSTDEVDIR); done;
-#	for F in $(FILES); do ln -fs $(PWD)/$$F $(INSTDEVDIR); done;
-#	for F in $(FILESF90); do ln -fs $(PWD)/$$F $(INSTDEVDIR); done;
 
 .f.x:
 	$(FC) $(OPTIONS) -o $*.x $*.f
@@ -87,55 +69,49 @@ clean:
 # Compiling executables
 #
 ## ----- PREP STAGE -----
-#tmelnew.x: tmelnew.f
-#	$(FC) $(OPTIONS) tmelnew.f -o tmelnew.x
-#
-#whom0.x: whom0.f
-#	$(FC) $(OPTIONS) whom0.f -o whom0.x
-#
-#frmtwf.x: frmtwf.f
-#	$(FC) $(OPTIONS) frmtwf.f -o frmtwf.x
-#
-#rhoofg.x: rho2.f90
-#	$(FC) $(OPTIONS) rho2.f90 -o rhoofg.x $(FFTI) $(FFTWL)
-#
-#nelectron.x: nelectron.f90
-#	$(FC) $(OPTIONS) nelectron.f90 -o nelectron.x
+tmelnew.x: tmelnew.f
+	$(FC) $(OPTIONS) tmelnew.f -o tmelnew.x
+
+whom0.x: whom0.f
+	$(FC) $(OPTIONS) whom0.f -o whom0.x
+
+frmtwf.x: frmtwf.f
+	$(FC) $(OPTIONS) frmtwf.f -o frmtwf.x
+
+rhoofg.x: rho2.f90
+	$(FC) $(OPTIONS) rho2.f90 -o rhoofg.x $(FFTI) $(FFTWL)
+
+nelectron.x: nelectron.f90
+	$(FC) $(OPTIONS) nelectron.f90 -o nelectron.x
 
 
-#datagen.x: $(DATAGEN_OBJS)
-#	$(FC) $(DATAGEN_INCL) -o datagen.x $(DATAGEN_OBJS) $(DATAGEN_LIB) 
+datagen.x: $(DATAGEN_OBJS)
+	$(FC) $(DATAGEN_INCL) -o datagen.x $(DATAGEN_OBJS) $(DATAGEN_LIB) 
 
-#setup2.x: $(SETUP_OBJS)
-#	$(FC) $(OPTIONS) $(SETUP_OBJS) -o setup2.x
-#
-#conugtoux.x: $(CONVUG_UX_OBJS)
-#	$(FC) $(OPTIONS) $(CONVUG_UX_OBJS) -o conugtoux.x
-#
-#orthog.x: $(ORTHOG_OBJS)
-#	$(FC) $(OPTIONS) $(ORTHOG_OBJS) -o orthog.x
-#
-#condens2.x: $(CONDENS2_OBJS)
-#	$(FC) $(OPTIONS) $(CONDENS2_OBJS) -o condens2.x
-#
-#ll.x: $(LL_OBJS)
-#	$(FC) $(OPTIONS) $(LL_OBJS) -o ll.x
-#
-#bridgelad.x: $(BRIDGELAD_OBJS)
-#	$(FC) $(OPTIONS) $(BRIDGELAD_OBJS) -o bridgelad.x
-#
-#bridgegw.x: $(BRIDGEGW_OBJS)
-#	$(FC) $(OPTIONS) $(BRIDGEGW_OBJS) -o bridgegw.x
+setup2.x: $(SETUP_OBJS)
+	$(FC) $(OPTIONS) $(SETUP_OBJS) -o setup2.x
+
+conugtoux.x: $(CONVUG_UX_OBJS)
+	$(FC) $(OPTIONS) $(CONVUG_UX_OBJS) -o conugtoux.x
+
+orthog.x: $(ORTHOG_OBJS)
+	$(FC) $(OPTIONS) $(ORTHOG_OBJS) -o orthog.x
+
+condens2.x: $(CONDENS2_OBJS)
+	$(FC) $(OPTIONS) $(CONDENS2_OBJS) -o condens2.x
+
+ll.x: $(LL_OBJS)
+	$(FC) $(OPTIONS) $(LL_OBJS) -o ll.x
+
+bridgelad.x: $(BRIDGELAD_OBJS)
+	$(FC) $(OPTIONS) $(BRIDGELAD_OBJS) -o bridgelad.x
+
+bridgegw.x: $(BRIDGEGW_OBJS)
+	$(FC) $(OPTIONS) $(BRIDGEGW_OBJS) -o bridgegw.x
 
 #---- BSE STAGE -----
-#smnewma.x: $(SMNEWMA_OBJS)
-#	$(FC) $(OPTIONS) $(SMNEWMA_OBJS) -o smnewma.x $(LIBS1)
-
-#smnewma2.x: $(SMNEWMA2_OBJS)
-#	$(FC) $(OPTIONS) $(SMNEWMA2_OBJS) -o smnewma2.x $(LIBS1)
-
-#smnewma2.x: smnewma2.f90 $(BSE_OBJS)
-#	$(FC) $(OPTIONS) smnewma2.f90 $(BSE_OBJS) -o smnewma2.x $(LIBS1)
+smnewma.x: $(SMNEWMA_OBJS)
+	$(FC) $(OPTIONS) $(SMNEWMA_OBJS) -o smnewma.x $(LIBS1)
 
 spectrum.x: spectrum.o lxb_getval.o
 	$(FC) $(OPTIONS) spectrum.f lxb_getval.o -o spectrum.x
@@ -143,13 +119,10 @@ spectrum.x: spectrum.o lxb_getval.o
 zspectrum.x: zspectrum.o lxb_getval.o
 	$(FC) $(OPTIONS) zspectrum.f lxb_getval.o -o zspectrum.x
 
-#smnewma_nherm.x: smnewma_nherm.f90 $(BSE_OBJS)
-#	$(FC) -o smnewma_nherm.x $(OPTIONS) smnewma_nherm.f90 $(BSE_OBJS) $(LIBS1)
+smnewma_nherm.x: smnewma_nherm.f90 $(BSE_OBJS)
+	$(FC) -o smnewma_nherm.x $(OPTIONS) smnewma_nherm.f90 $(BSE_OBJS) $(LIBS1)
 
 # Parallel code with ScaLAPACK
-psmnewma_nherm_full.x: psmnewma_nherm_full.f90 $(BSE_OBJS)
-	$(FC) -o psmnewma_nherm_full.x $(POPT) psmnewma_nherm_full.f90 $(BSE_OBJS) $(LIBS2)
-##	$(FC) $(POPT) psmnewma2_full.f90 $(BSE_OBJS) -o psmnewma2_full.x $(LIBS2)
 
 psmnewma_nherm_pro.x: psmnewma_nherm_pro.f90 $(BSE_OBJS)
 	$(FC) -o psmnewma_nherm_pro.x $(POPT) psmnewma_nherm_pro.f90 $(BSE_OBJS) $(LIBS2)
@@ -157,53 +130,53 @@ psmnewma_nherm_pro.x: psmnewma_nherm_pro.f90 $(BSE_OBJS)
 # Generating object files
 #
 #  ooooo PREP STAGE  ooooo
-#datagen.o: datagen.f90
-#	$(FC) $(OPTIONS) datagen.f90 -c datagen.o
+datagen.o: datagen.f90
+	$(FC) $(OPTIONS) datagen.f90 -c datagen.o
 
-#setup2.o: setup2.f90
-#	$(FC) $(OPTIONS) setup2.f90 -c setup2.o
+setup2.o: setup2.f90
+	$(FC) $(OPTIONS) setup2.f90 -c setup2.o
 
-#conugtoux.o: conugtoux.f90
-#	$(FC) $(OPTIONS) conugtoux.f90 -c conugtoux.o
+conugtoux.o: conugtoux.f90
+	$(FC) $(OPTIONS) conugtoux.f90 -c conugtoux.o
 
-#orthog.o: orthog.f90
-#	$(FC) $(OPTIONS) orthog.f90 -c orthog.o
+orthog.o: orthog.f90
+	$(FC) $(OPTIONS) orthog.f90 -c orthog.o
 
-#condens2.o: condens2.f90
-#	$(FC) $(OPTIONS) condens2.f90 -c condens2.o
+condens2.o: condens2.f90
+	$(FC) $(OPTIONS) condens2.f90 -c condens2.o
 
-#getqefiles.o: getqefiles.f90
-#	$(FC) $(OPTIONS) getqefiles.f90 -c getqefiles.o
+getqefiles.o: getqefiles.f90
+	$(FC) $(OPTIONS) getqefiles.f90 -c getqefiles.o
 
-#getrecvec.o: getrecvec.f90
-#	$(FC) $(OPTIONS) getrecvec.f90 -c getrecvec.o 
+getrecvec.o: getrecvec.f90
+	$(FC) $(OPTIONS) getrecvec.f90 -c getrecvec.o 
 
-#cross.o: cross.f90
-#	$(FC) $(OPTIONS) cross.f90 -c cross.o
+cross.o: cross.f90
+	$(FC) $(OPTIONS) cross.f90 -c cross.o
 
 lxb_getval.o: lxb_getval.f90
 	$(FC) $(OPTIONS) lxb_getval.f90 -c -o lxb_getval.o 
 
-#enkread.o: enkread.f90
-#	$(FC) $(OPTIONS) enkread.f90 -c enkread.o 
+enkread.o: enkread.f90
+	$(FC) $(OPTIONS) enkread.f90 -c enkread.o 
 
-#melread.o: melread.f90
-#	$(FC) $(OPTIONS) melread.f90 -c melread.o 
+melread.o: melread.f90
+	$(FC) $(OPTIONS) melread.f90 -c melread.o 
 
-#gentoreal.o: gentoreal.f90
-#	$(FC) $(OPTIONS) gentoreal.f90 -c gentoreal.o 
+gentoreal.o: gentoreal.f90
+	$(FC) $(OPTIONS) gentoreal.f90 -c gentoreal.o 
 
-#facpowfind.o: facpowfind.f90
-#	$(FC) $(OPTIONS) facpowfind.f90 -c facpowfind.o 
+facpowfind.o: facpowfind.f90
+	$(FC) $(OPTIONS) facpowfind.f90 -c facpowfind.o 
 
-#optim.o: optim.f90
-#	$(FC) $(OPTIONS) optim.f90 -c optim.o
+optim.o: optim.f90
+	$(FC) $(OPTIONS) optim.f90 -c optim.o
 
-#chkfftreal.o: chkfftreal.f90
-#	$(FC) $(OPTIONS) chkfftreal.f90 -c chkfftreal.o 
+chkfftreal.o: chkfftreal.f90
+	$(FC) $(OPTIONS) chkfftreal.f90 -c chkfftreal.o 
 
-#chkfftrecp.o: chkfftrecp.f90
-#	$(FC) $(OPTIONS) chkfftrecp.f90 -c chkfftrecp.o 
+chkfftrecp.o: chkfftrecp.f90
+	$(FC) $(OPTIONS) chkfftrecp.f90 -c chkfftrecp.o 
 
 jlmfft.o: jlmfft.f
 	$(FC) $(OPTIONS) jlmfft.f -c -o jlmfft.o 
@@ -211,32 +184,32 @@ jlmfft.o: jlmfft.f
 formx.o: formx.f90
 	$(FC) $(OPTIONS) formx.f90 -c -o formx.o 
 
-#dptest.o: dptest.f90
-#	$(FC) $(OPTIONS) dptest.f90 -c dptest.o 
+dptest.o: dptest.f90
+	$(FC) $(OPTIONS) dptest.f90 -c dptest.o 
 
-#normalize.o: normalize.f90
-#	$(FC) $(OPTIONS) normalize.f90 -c normalize.o 
+normalize.o: normalize.f90
+	$(FC) $(OPTIONS) normalize.f90 -c normalize.o 
 
-#rho.o: rho.f90
-#	$(FC) $(OPTIONS) rho.f90 -c rho.o 
+rho.o: rho.f90
+	$(FC) $(OPTIONS) rho.f90 -c rho.o 
 
-#brcapper.o: brcapper.f90
-#	$(FC) $(OPTIONS) brcapper.f90 -c brcapper.o 
+brcapper.o: brcapper.f90
+	$(FC) $(OPTIONS) brcapper.f90 -c brcapper.o 
 
-#solidca.o: solidca.f
-#	$(FC) $(OPTIONS) solidca.f -c solidca.o 
+solidca.o: solidca.f
+	$(FC) $(OPTIONS) solidca.f -c solidca.o 
 
-#levlou.o: levlou.f
-#	$(FC) $(OPTIONS) levlou.f -c levlou.o 
+levlou.o: levlou.f
+	$(FC) $(OPTIONS) levlou.f -c levlou.o 
 
-#dublinterp.o: dublinterp.f90
-#	$(FC) $(OPTIONS) dublinterp.f90 -c dublinterp.o 
+dublinterp.o: dublinterp.f90
+	$(FC) $(OPTIONS) dublinterp.f90 -c dublinterp.o 
 
-#dist.o: dist.f90
-#	$(FC) $(OPTIONS) dist.f90 -c dist.o 
+dist.o: dist.f90
+	$(FC) $(OPTIONS) dist.f90 -c dist.o 
 
-#getspacings.o: getspacings.f90
-#	$(FC) $(OPTIONS) getspacings.f90 -c getspacings.o 
+getspacings.o: getspacings.f90
+	$(FC) $(OPTIONS) getspacings.f90 -c getspacings.o 
 
 # oooo BSE STAGE ooooo
 # need -c -o to run with mpiifort
@@ -256,8 +229,8 @@ bdallck.o: bdallck.f90
 uphase.o: uphase.f90
 	$(FC) $(OPTIONS) uphase.f90 -c -o uphase.o 
 
-#haydock.o: haydock.f90
-#	$(FC) $(OPTIONS) haydock.f90 -c -o haydock.o 
+haydock.o: haydock.f90
+	$(FC) $(OPTIONS) haydock.f90 -c -o haydock.o 
 
 act.o: act.f90
 	$(FC) $(OPTIONS) act.f90 -c -o act.o 
