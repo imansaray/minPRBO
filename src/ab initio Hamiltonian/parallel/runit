@@ -1,0 +1,29 @@
+#!/bin/bash
+#SBATCH --ntasks 32 -N 2
+#SBATCH -t 1:00:00 
+##-c 1 --ntasks-per-socket=16
+#SBATCH --qos=normal --partition=batch
+##pml 
+##--switches=1@5:00
+#SBATCH --exclusive  
+#SBATCH --mem 92000 -J Si --exclude=n2042,n2043
+##SBATCH --mail-user=ishiaka.mansaray@nist.gov
+#SBATCH --mail-type=ALL
+#SBATCH --job-name='scalapack'
+
+module purge
+module load oneapi/2023.0.0
+module load impi/oneapi-2023.0.0
+module load gcc/toolset/12
+module load lapack/3.11.0/oneapi-2023.0.0
+module load fftw/3.3.10/impi-oneapi-2023.0.0
+module load scalapack/2.2.0/impi-oneapi-2023.0.0
+module load libxc/6.1.0/oneapi-2023.0.0
+module load gsl/2.7.1/gcc-11
+module list
+
+
+#mpirun -n 64 ./psmnewma_nherm_full.x
+mpirun -n 64 ./psmnewma_nherm_pro.x
+
+echo "ALL DONE!!"
