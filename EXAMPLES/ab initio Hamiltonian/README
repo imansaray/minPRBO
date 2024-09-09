@@ -7,7 +7,8 @@ Notation:
          TDA - Tamm Dancoff approximation
          b - flag to turn the "bubbles" part of electron-hole interaction on and off
          l - flag to turn the "ladder" part of electron-hole interaction on and off
-         FBSE - full BSE, the GMRES spectra within the full BSE matches with the TDA spectra from the Lanczos algorithm only at the IPA, i.e., b = 0, l=0
+         FBSE - full BSE, the GMRES spectra within the full BSE matches with the TDA spectra from the Lanczos algorithm only at the IPA, i.e., b = 0, l=0.
+                With full interaction turned on (b=1,l=1),the coupling blocks in the FBSE include additional physics thats ignored when one does just TDA.
 
 File names
          f_*** - corresponds to the Loss of orthogonality calculated from the Frobenius norm of the matrix.
@@ -59,10 +60,55 @@ Figure 6:
         orth_lev_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
         orth_lev_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
         orth_lev_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
-        orth_lev_tda_nherm_prbo_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
-        orth_lev_tda_nherm_prbo_10_1_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
-        orth_lev_tda_nherm_prbo_10_2_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
-        orth_lev_tda_nherm_prbo_10_4_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
-        orth_lev_tda_nherm_prbo_10_6_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_10_1_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_10_2_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_10_4_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_10_6_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
 
+Figure 7:
+       orthinfo_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+       orthinfo_tda_nherm_minprbo_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+       orthinfo_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_1_l_0
+       orthinfo_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
 
+Figure 8:
+       opcons_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_0_l_0
+       opcons_fbse_gmres_gam_1E_m1_scal_0E_m1_b_0_l_0
+       opcons_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+Figure 9:
+       opcons_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_1_l_1
+       opcons_tda_pnherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_1_l_1
+
+Figure 10:
+        orth_lev_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_reps_gam_E0_m1_scal_1E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_reps_gam_0E_m1_scal_2E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_reps_gam_0E_m1_scal_3E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_reps_gam_0E_m1_scal_4E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_reps_gam_0E_m1_scal_5E_m1_b_0_l_0
+
+Figure 11:
+       opcons_fbse_gmres_gam_1E_m1_scal_0E_m1_b_0_l_0
+       opcons_fbse_gmres_gam_0E_m1_scal_1E_m1_b_0_l_0
+       opcons_fbse_gmres_gam_0E_m1_scal_2E_m1_b_0_l_0
+       opcons_fbse_gmres_gam_0E_m1_scal_3E_m1_b_0_l_0
+       opcons_fbse_gmres_gam_0E_m1_scal_4E_m1_b_0_l_0
+       opcons_fbse_gmres_gam_0E_m1_scal_5E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_0E_m1_scal_1E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_0E_m1_scal_2E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_0E_m1_scal_3E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_0E_m1_scal_4E_m1_b_0_l_0
+       opcons_tda_nherm_minprbo_reps_gam_0E_m1_scal_5E_m1_b_0_l_0
+
+Figure 12:
+       opcons_tda_gmres_gam_1E_m1_scal_0E_m1_b_1_l_1
+       opcons_tda_gmres_gam_0E_m1_scal_1E_m1_b_1_l_1
+       opcons_tda_gmres_gam_0E_m1_scal_2E_m1_b_1_l_1
+       opcons_tda_pnherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_1_l_1_pos_nrg
+       opcons_tda_pnherm_minprbo_reps_gam_0E_m1_scal_1E_m1_b_1_l_1_pos_nrg
+       opcons_tda_pnherm_minprbo_reps_gam_0E_m1_scal_2E_m1_b_1_l_1_pos_nrg
+       
