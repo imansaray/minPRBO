@@ -1,1 +1,68 @@
+The data files included here correspond to those used for the plots in the paper.
+
+Notation: 
+         gam - the constant, small imaginary number added in the Hermitian spectrum calculation and for GMRES
+         scal - the scaling factor for the imaginary energies added to form the complex energy Hamiltonian
+         niter - the number of Lanczos iterations
+         TDA - Tamm Dancoff approximation
+         b - flag to turn the "bubbles" part of electron-hole interaction on and off
+         l - flag to turn the "ladder" part of electron-hole interaction on and off
+         FBSE - full BSE, the GMRES spectra within the full BSE matches with the TDA spectra from the Lanczos algorithm only at the IPA, i.e., b = 0, l=0
+
+File names
+         f_*** - corresponds to the Loss of orthogonality calculated from the Frobenius norm of the matrix.
+         opcons_*** - contains the real and imaginary parts of the dielectric function. 
+                      For GMRES, contains energy, e1,e1 (see serial code section).
+                      For Lanczos, contains energy, e1,e2 and other constants (see header in e.g file).
+         diff_*** - contains the differnce between two spectra specified in file name.
+         orthinfo_*** - contains rebiorthogonalization information from minprbo.
+         orth_lev_*** - contains the level of biorthogonality at each iteration, a local measure of the biorthogonality amongst Lanczos vectors (see paper for calculation).
+         ima_a_*** - imaginary part of the Lanczos coefficient a/alpha
+         herm - hermitian
+         nherm - non Hermitian
+         pnherm - non Hermitian Lanczos carried out with parallel code
+         no - no orthogonalization
+         prbo - partial rebiorthogonalization
+         minprbo - minimal partial rebiorthogonalization
+         full - full rebiorthogonalization
+         reps - square root of epsilon
+         exact - exact dielectric function in case of b=0,l=0
+
+Figure 1:
+         f_tda_herm_no_niter_400_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+Figure 2:
+        opcons_tda_herm_no_niter_100_gam_1E_m1_scal_0E_m1_b_0_l_0
+        opcons_tda_herm_no_niter_200_gam_1E_m1_scal_0E_m1_b_0_l_0
+        opcons_tda_herm_no_niter_300_gam_1E_m1_scal_0E_m1_b_0_l_0
+        opcons_tda_herm_no_niter_400_gam_1E_m1_scal_0E_m1_b_0_l_0
+        diff_exact_herm_niter_100_b_0_l_0
+        diff_exact_herm_niter_200_b_0_l_0
+        diff_exact_herm_niter_300_b_0_l_0
+        diff_exact_herm_niter_400_b_0_l_0
+
+Figure 3:
+        f_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+        im_a_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+Figure 4:
+        orth_lev_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_prbo1_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_mprbo2_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+Figure 5:
+        opcons_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        opcons_tda_nherm_prbo1_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        opcons_tda_nherm_mprbo2_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+
+Figure 6:
+        orth_lev_tda_nherm_full_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_minprbo_reps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_no_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_prbo_10_0_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_prbo_10_1_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_prbo_10_2_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_prbo_10_4_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+        orth_lev_tda_nherm_prbo_10_6_eps_gam_1E_m1_scal_0E_m1_b_0_l_0
+
 
