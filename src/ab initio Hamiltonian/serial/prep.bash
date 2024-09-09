@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Script to run all the executables in iocean_nbse_mini
-
 echo "********** The Quantum Espresso calculations have been successfully completed. ***********"
 echo " "
 echo "                Now generating all the executables"
@@ -71,15 +69,4 @@ echo " 9.) ****** Calculating the ladder.dat file ******"
 echo " "
 echo "   : successfully generated the ladder.dat file "
 echo " " 
-echo " " 
-echo " 10.) ****** Calculating the Lanczos coefficients ******"
-./smnewma2.x
-echo " "
-echo "   : successfully generated the lanczos coefficients a, b "
-echo " " 
-echo " " 
-echo " 11.) ****** Calculating the spectrum using Lanczos coefficients ******"
-./zspectrum.x
-echo " "
-echo "   : successfully calculated the optical spectrum, saved in opcons "
 echo " " 
