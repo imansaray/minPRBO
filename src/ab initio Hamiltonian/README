@@ -1,11 +1,12 @@
 The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data 
-is obtained with OCEAN(https://github.com/times-software/OCEAN/) with input file Si.in, and pseudo-potential file si.fhi.UPF from PseudoDojo.  
+is obtained with OCEAN (https://github.com/times-software/OCEAN/) with input file Si.in, and pseudo-potential file si.fhi.UPF from PseudoDojo.  
 
-Codes based on the AI2NBSE (https://github.com/feffgroup/AI2NBSE) codes are used to carry out the calculation of the dielectric function.
+Codes based on AI2NBSE (https://github.com/feffgroup/AI2NBSE) are used to carry out the calculation of the dielectric function.
 
-The ab initio data is processed into intermediate data files that are needed for running the main codes. These data files are included in the corresponding directories.
+The ab initio data is processed into intermediate data files that are needed for running the main codes. 
 
-MAIN PROGRAMS 
+
+                                               MAIN PROGRAMS 
 
      serial code
           smnewma.f90 : the Hermitian Lanczos algorithm and GMRES are implemented in smnewma.f90. Each case
@@ -21,12 +22,13 @@ MAIN PROGRAMS
                        written to file at the end of the GMRES calculation. The name of the file can be set in smnewma.f90.
 
           zspectrum.f : used to calculate the complex dielectric function and other derived quantities from the non-Hermitian Lanczos 
-                       coefficients (comlex numbers) obtained from smnewma.f90.
+                       coefficients (complex numbers) obtained from smnewma.f90.
      parallel code
           psmnewma_nherm_minprbo.f90 : a parallel implementation of minPRBO which produces the non-Hermitian Lanczos coefficients
                        that can be used with zspectrum.f to obtain the optical quantities. 
 
-INPUT FILES TO EDIT FOR DOING RUNS
+
+                                           INPUT FILES TO EDIT FOR DOING RUNS
 
 niter.h : this contains options for the number of Lanczos iterations, different flags to turn on/off parts of the electron hole interaction, 
 quasiparticle corrections, a full BSE calculation and whether a non Hermitian Hamiltonian is been used
