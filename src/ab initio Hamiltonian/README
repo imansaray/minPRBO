@@ -3,7 +3,7 @@ is obtained with OCEAN(https://github.com/times-software/OCEAN/) with input file
 
 Codes based on the AI2NBSE (https://github.com/feffgroup/AI2NBSE) codes are used to carry out the calculation of the dielectric function.
 
-The ab initio data is processed into intermediary data files that are needed for running the main codes. These data files are included in the corresponding directories.
+The ab initio data is processed into intermediate data files that are needed for running the main codes. These data files are included in the corresponding directories.
 
 MAIN PROGRAMS 
 
