@@ -4,7 +4,7 @@ It assumes that OCEAN (https://github.com/times-software/OCEAN/) is already inst
 *** To enable saving of the data files required for running the serial codes, in the file /OCEAN/PREP/src/prep_wvfn.f90 there is a 
 'wantLegacy' flag that should be set to 'true' before the executables are generated. ***
 
-1. Complete an OCEAN run (lets call this 'ocean_run_dir') within the TDA, using the provided input file, and pseudopotential file.
+1. Complete an OCEAN run (lets call the directory where the run is done 'ocean_run_dir') within the TDA, using the provided input file, and pseudopotential file.
 
 2. Go into the 'ocean_run_dir/DFT' folder. There will be two folders
 with the input kpts (16 by 16 by 16), but differnt q. Go into the folder with the rational q values.
