@@ -37,11 +37,6 @@ SMNEWMA_OBJS = smnewma.f90 lxb_getval.o formx.o kmapr.o getwgt.o getumat.o bdall
 	     getband.o wvfdot.o ctrdfft.o elsdch.o jlmfft.o gradorth.o \
 	     inner.o soldrv.o subspace.o velmul.o velmuls.o  
 
-SMNEWMA2_OBJS = smnewma2.f90 lxb_getval.o formx.o kmapr.o getwgt.o getumat.o bdallck.o uphase.o haydock.o act.o \
-	     act_1e.o smbubble.o smkxc.o smlsauber.o adump.o invdrv.o cinvert.o coulmult.o aclip.o bfnorm.o \
-	     getband.o wvfdot.o ctrdfft.o elsdch.o jlmfft.o gradorth.o \
-	     inner.o soldrv.o subspace.o velmul.o velmuls.o  
-
 # Libraries
 LIBS1 = -llapack -lblas
 LIBS2 = -lm -lgfortran -lscalapack -llapack -lblas #-llapack 
