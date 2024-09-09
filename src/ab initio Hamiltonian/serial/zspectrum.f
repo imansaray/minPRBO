@@ -167,7 +167,7 @@ c      nonherm = 0
           be  = - e - a( i ) - c( i + 1 )*conjg(b(i+1)) / be
         end do
         if (bwflg .eq. 0) then
-           eps = 1.d0 - fact / al - fact / be
+           eps = 1.d0 - fact / al  !- fact / be ! Leave the negative enrgy part out for comparison to GMRES pos energy soln
         else
            eps = 1.d0 - fact / al
         endif
