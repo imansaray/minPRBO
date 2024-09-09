@@ -41,6 +41,7 @@ SMNEWMA_OBJS = smnewma.f90 lxb_getval.o formx.o kmapr.o getwgt.o getumat.o bdall
 LIBS1 = -llapack -lblas
 LIBS2 = -lm -lgfortran -lscalapack -llapack -lblas #-llapack 
 
+# Edit this for your installation of fftw3
 #FFTI = -I/usr/include/
 #FFTWL = -L/usr/lib/x86_64-linux-gnu/ -lfftw3
 FFTI = -I/usr/local/almalinux9/inteloneapi/2023.0.0/mkl/2023.0.0/include/fftw/
