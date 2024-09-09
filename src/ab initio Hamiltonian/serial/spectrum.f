@@ -128,7 +128,7 @@ c        print *
 c        print *, " bl =",be, "fact/bl =",fact/be
 c        print *
 
-        eps = 1.d0 - fact / al - fact / be
+        eps = 1.d0 - fact / al  !- fact / be ! For comparison to GMRES positive energy solution leave this part out
 c        print *, " eps = ",eps
 c        print *
         reeps = dble( eps )
