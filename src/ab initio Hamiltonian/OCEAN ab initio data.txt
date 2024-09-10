@@ -25,9 +25,9 @@ from Quantum Espresso.
 
 8. Run prep.bash to generate the necessary input files using the OCEAN data.
 
-9. After prep.bash completes succesfully, go to ocean_run_dir/PREP/BSE and copy again the following files
+9. After prep.bash completes succesfully, go to ocean_run_dir/PREP/BSE and copy again the following file
    into serial_run_dir:
-       u2.dat,ptmels.dat,tmels.
+       u2.dat
 
 10. Once all the intermediate data and input files are successfully generated, you can now run the main
     programs following the description in the README file.
