@@ -24,27 +24,23 @@ echo "   : successfully generated all the input files "
 echo " " 
 cp efermiinrydberg.ipt efryd.ipt
 
-echo " 2.) ******  Generating the transition matrix elements file - tmels ******  "
-./tmelnew.x
-echo " "
-echo "   : successfully generated the tmels file "
 echo " " 
-echo " 3.) ******  Generating more input files and reordering eigen values and tmels ****** "
+echo " 2.) ******  Generating more input files and reordering eigen values and tmels ****** "
 ./setup2.x
 echo " "
 echo "   : successfully completed setup "
 echo " " 
-echo " 4.) ****** Converting u1.dat from u of g to u of x  ******"
+echo " 3.) ****** Converting u1.dat from u of g to u of x  ******"
 ./conugtoux.x
 echo " "
 echo "   : successfully converted u of g to u of x and saved in u1.dat "
 echo " " 
-echo " 5.) ****** Orthonormalizing the wavefunctions and storing in u2.dat ******"
+echo " 4.) ****** Orthonormalizing the wavefunctions and storing in u2.dat ******"
 ./orthog.x
 echo " "
 echo "   : successfully orthonormalized wavefunciton coefficients "
 echo " " 
-echo " 6.) ****** Converting the density from rhoofr to rho : x, y, z ******"
+echo " 5.) ****** Converting the density from rhoofr to rho : x, y, z ******"
 ./condens2.x
 echo " "
 echo "   : successfully converted the density file "
