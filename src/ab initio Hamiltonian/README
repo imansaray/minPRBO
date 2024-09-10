@@ -3,7 +3,7 @@ is obtained with OCEAN (https://github.com/times-software/OCEAN/) with input fil
 
 Codes based on NBSE by Eric Shirley from AI2NBSE (https://github.com/feffgroup/AI2NBSE/NBSE) are used to carry out the calculation of the dielectric function.
 
-The following codes were modified:
+The following NBSE codes were modified:
           spectrum.f, bridgegw.f90, enkread.f90, melread.f90, rho.f90, setup2.f90,
           getwgt.f90, getumat.f90, bdallck.f90, getband.f90, haydock.f90, act.f90,
           act_1e.f90, adump.f90, getband.f90, smnewma.f90
