@@ -1,7 +1,8 @@
 The ab initio Hamiltonian used as an example is for silicon, with 24 bands, 16^3 k points. The relevant ab initio data 
 is obtained with OCEAN (https://github.com/times-software/OCEAN/) with input file Si.in, and pseudo-potential file si.fhi.UPF from PseudoDojo.  
 
-Codes based on NBSE by Eric Shirley from AI2NBSE (https://github.com/feffgroup/AI2NBSE/NBSE) are used to carry out the calculation of the dielectric function.
+Codes based on NBSE by Eric Shirley from (https://github.com/feffgroup/AI2NBSE/NBSE) and from personal communication 
+are used to carry out the calculation of the dielectric function.
 
 The following NBSE codes were modified:
           spectrum.f, bridgegw.f90, enkread.f90, melread.f90, rho.f90, setup2.f90,
