@@ -9,7 +9,7 @@ FC = mpiifort
 POPT = -g -traceback -fp-stack-check -check bounds
 #
 # Executable files from the program files
-PREPFILES   = tmelnew.x frmtwf.x whom0.x nelectron.x rhoofg.x datagen.x setup2.x \
+PREPFILES   = whom0.x datagen.x setup2.x \
 	      conugtoux.x orthog.x condens2.x ll.x bridgelad.x bridgegw.x
 
 BSEFILES = spectrum.x zspectrum.x psmnewma_nherm_pro.x \
@@ -65,21 +65,9 @@ clean:
 # Compiling executables
 #
 ## ----- PREP STAGE -----
-tmelnew.x: tmelnew.f
-	$(FC) $(OPTIONS) tmelnew.f -o tmelnew.x
 
 whom0.x: whom0.f
 	$(FC) $(OPTIONS) whom0.f -o whom0.x
-
-frmtwf.x: frmtwf.f
-	$(FC) $(OPTIONS) frmtwf.f -o frmtwf.x
-
-rhoofg.x: rho2.f90
-	$(FC) $(OPTIONS) rho2.f90 -o rhoofg.x $(FFTI) $(FFTWL)
-
-nelectron.x: nelectron.f90
-	$(FC) $(OPTIONS) nelectron.f90 -o nelectron.x
-
 
 datagen.x: $(DATAGEN_OBJS)
 	$(FC) $(DATAGEN_INCL) -o datagen.x $(DATAGEN_OBJS) $(DATAGEN_LIB) 
