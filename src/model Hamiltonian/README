@@ -5,3 +5,7 @@ It carries out full, partial rebiorthogonalization as initially described in the
 
 When carrying out reorthogonalization or rebiorthogonalization, there are different ways of carrying out the Gram-Schmidt process with varying costs and stability. Different options are implemented in the code.
 
+A simple model Hamiltonian is included to test the routines. A user can define or input their own Hamiltonian. 
+
+The motivation for minPRBO was non-Hermitian Hamiltonians in the context of solid-state systems. 
+These tend to have a narrow spectral range, and as such minPRBO will work well for model Hamiltonians of a similar nature.
