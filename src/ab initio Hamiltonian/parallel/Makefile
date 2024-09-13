@@ -1,5 +1,5 @@
-# Makefile to compile the subroutines for obtaining the ABINIT wave functions, densities, potentials
-# and putting them into form compatible with AI2NBSE codes
+# Makefile to compile the subroutines for obtaining the Quantum Espresso wave functions, densities, potentials
+# and putting them into form compatible with NBSE codes
 #
 .SUFFIXES: .f .x .f90
 #FC = gfortran
