@@ -5,6 +5,7 @@ It assumes that OCEAN (https://github.com/times-software/OCEAN/) is already inst
 'wantLegacy' flag that should be set to 'true' before the executables are generated. ***
 
 1. Complete an OCEAN run (lets call the directory where the run is done 'ocean_run_dir') within the TDA, using the provided input file, and pseudopotential file.
+   ** Make sure that the total number of MPI tasks used matches line 3 in the input file Si.in. **
 
 2. Go into the 'ocean_run_dir/DFT' folder. There will be two folders
 with the input kpts (16 by 16 by 16), but differnt q. Go into the folder with the rational q values.
