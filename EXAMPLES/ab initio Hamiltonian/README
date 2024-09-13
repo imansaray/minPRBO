@@ -13,12 +13,12 @@ Notation:
 File names
          f_*** - corresponds to the Loss of orthogonality calculated from the Frobenius norm of the matrix.
          opcons_*** - contains the real and imaginary parts of the dielectric function. 
-                      For GMRES, contains energy, e1,e1 (see serial code section).
+                      For GMRES, contains energy, e1,e2 (see serial code section).
                       For Lanczos, contains energy, e1,e2 and other constants (see header in e.g file).
-         diff_*** - contains the differnce between two spectra specified in file name.
+         diff_*** - contains the difference between two spectra specified in file name.
          orthinfo_*** - contains rebiorthogonalization information from minprbo.
-         orth_lev_*** - contains the level of biorthogonality at each iteration, a local measure of the biorthogonality amongst Lanczos vectors (see paper for calculation).
-         ima_a_*** - imaginary part of the Lanczos coefficient a/alpha
+         orth_lev_*** - contains the level of biorthogonality at each iteration, a local measure of the biorthogonality amongst Lanczos vectors (see paper for method of calculation).
+         im_a_*** - imaginary part of the Lanczos coefficient a/alpha
          herm - hermitian
          nherm - non Hermitian
          pnherm - non Hermitian Lanczos carried out with parallel code
